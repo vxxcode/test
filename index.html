@@ -1,0 +1,2769 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kate's Original Gadgets | Premium Light Pink Tech Store</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        pinktheme: {
+                            50: '#FFF5F8',   // Ultra soft light pink background
+                            100: '#FCEEF2',  // Light pink primary tint
+                            200: '#F8DDE5',  // Soft blush accent & borders
+                            300: '#F3C0D0',  // Rose pink pill / badges
+                            400: '#E297AF',  // Rose gold pink
+                            500: '#C86D8B',  // Soft magenta rose accent
+                            600: '#9E4665',  // Deep rose accent
+                            700: '#7B314E',  // Rich plum pink (headings/buttons)
+                            800: '#592037',  // Dark rose text
+                            900: '#3D1223'   // Deepest text tone
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #FFF5F8;
+            color: #592037;
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #FFF5F8;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #F3C0D0;
+            border-radius: 4px;
+        }
+        .modal-backdrop {
+            background-color: rgba(89, 32, 55, 0.4);
+            backdrop-filter: blur(6px);
+        }
+        /* Hero banner transitions */
+@keyframes heroEnterRight {
+    from {
+        opacity: 0;
+        transform: translateX(35px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes heroEnterLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-35px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.hero-slide-enter-right {
+    animation: heroEnterRight 600ms ease-out both;
+}
+
+.hero-slide-enter-left {
+    animation: heroEnterLeft 600ms ease-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .hero-slide-enter-right,
+    .hero-slide-enter-left {
+        animation: none;
+    }
+}
+    </style>
+</head>
+<body class="min-h-screen flex flex-col selection:bg-pinktheme-200 selection:text-pinktheme-800">
+
+    <header class="sticky top-0 z-30 bg-[#FFF5F8]/90 backdrop-blur-md border-b border-pinktheme-200 shadow-sm transition-all duration-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20 gap-3 sm:gap-4">
+                
+                
+                <!-- BRAND LOGO -->
+            <a href="#" class="flex items-center shrink-0">
+                <img src="kate.jpg" alt="Kate's Original Gadgets" class="h-12 sm:h-16 w-auto rounded-xl object-contain hover:opacity-90 transition" />
+            </a>
+
+                <!-- POWER MAC STYLE "SELECT STORE" PILL BUTTON (HEADER) -->
+                <button onclick="openStoreModal()" class="flex items-center gap-2 px-3 py-2 rounded-full bg-white border border-pinktheme-200 text-pinktheme-800 text-xs font-bold hover:bg-pinktheme-100 hover:border-pinktheme-300 transition shadow-sm shrink-0">
+                    <div class="w-6 h-6 rounded-full bg-pinktheme-100 text-pinktheme-700 flex items-center justify-center text-xs">
+                        <i class="fa-solid fa-location-dot"></i>
+                    </div>
+                    <div class="text-left hidden lg:block">
+                        <span class="block text-[9px] font-extrabold uppercase tracking-wider text-pinktheme-600/80 leading-none">Fulfillment Store</span>
+                        <span id="selectedStoreHeaderLabel" class="text-xs font-black text-pinktheme-800 truncate max-w-[140px]">Greenhills Flagship</span>
+                    </div>
+                    <span id="selectedStoreHeaderLabelMobile" class="lg:hidden text-xs font-black text-pinktheme-800 truncate max-w-[90px] sm:max-w-[130px]">Greenhills</span>
+                    <i class="fa-solid fa-chevron-down text-[10px] text-pinktheme-500 ml-0.5"></i>
+                </button>
+
+                <!-- SEARCH BAR (DESKTOP) -->
+                <div class="hidden md:flex flex-1 max-w-sm mx-2">
+                    <div class="relative w-full">
+                        <input type="text" id="searchInput" oninput="handleSearch(this.value)" placeholder="Search iPhone, Samsung, AirPods..." 
+                            class="w-full pl-10 pr-4 py-2.5 bg-white border border-pinktheme-200 rounded-full text-xs text-pinktheme-800 placeholder-pinktheme-600/50 focus:outline-none focus:bg-white focus:border-pinktheme-400 focus:ring-2 focus:ring-pinktheme-200 transition-all shadow-sm">
+                        <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3 text-pinktheme-500 text-xs"></i>
+                    </div>
+                </div>
+
+                <!-- NAVIGATION ACTIONS -->
+                <div class="flex items-center gap-1.5 sm:gap-3">
+
+                    <!-- Wishlist Button -->
+                    <button onclick="toggleWishlistModal()" class="relative p-2.5 text-pinktheme-700 hover:bg-pinktheme-200/60 rounded-full transition" title="Wishlist">
+                        <i class="fa-regular fa-heart text-lg"></i>
+                        <span id="wishlistBadge" class="hidden absolute top-1 right-1 w-4 h-4 bg-pinktheme-500 text-white text-[9px] font-bold rounded-full flex items-center justify-center">0</span>
+                    </button>
+
+                    <!-- Shopping Cart Trigger -->
+                    <button onclick="toggleCartDrawer()" class="relative p-2.5 text-pinktheme-700 hover:bg-pinktheme-200/60 rounded-full transition flex items-center gap-2" title="Shopping Cart">
+                        <div class="relative">
+                            <i class="fa-solid fa-bag-shopping text-lg text-pinktheme-700"></i>
+                            <span id="cartBadge" class="absolute -top-1.5 -right-2 w-5 h-5 bg-pinktheme-600 text-white text-[10px] font-bold rounded-full flex items-center justify-center border-2 border-white shadow-sm">0</span>
+                        </div>
+                        
+                    </button>
+
+                    <div class="h-6 w-px bg-pinktheme-200 mx-0.5 sm:mx-1"></div>
+
+                    <!-- USER SIGN IN / PROFILE ICON BUTTON -->
+                    <div id="authHeaderContainer">
+                        <!-- Dynamically populated -->
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- MOBILE SCROLLABLE CATEGORY NAVIGATION -->
+<div class="lg:hidden flex items-center gap-2 overflow-x-auto py-2 px-4 no-scrollbar border-b border-pinktheme-200/60 bg-pinktheme-50/50">
+    <button onclick="filterCategory('all')" class="whitespace-nowrap px-3.5 py-1.5 rounded-full bg-pinktheme-700 text-white text-xs font-bold shadow-sm shrink-0">Shop All</button>
+    <button onclick="filterCategory('smartphones')" class="whitespace-nowrap px-3.5 py-1.5 rounded-full bg-white border border-pinktheme-200 text-pinktheme-800 text-xs font-bold shrink-0">iPhone</button>
+    <button onclick="filterCategory('tablets')" class="whitespace-nowrap px-3.5 py-1.5 rounded-full bg-white border border-pinktheme-200 text-pinktheme-800 text-xs font-bold shrink-0">iPad</button>
+    <button onclick="filterCategory('smartwatches')" class="whitespace-nowrap px-3.5 py-1.5 rounded-full bg-white border border-pinktheme-200 text-pinktheme-800 text-xs font-bold shrink-0">Watch</button>
+    <button onclick="filterCategory('audio')" class="whitespace-nowrap px-3.5 py-1.5 rounded-full bg-white border border-pinktheme-200 text-pinktheme-800 text-xs font-bold shrink-0">AirPods</button>
+    <button onclick="filterCategory('accessories')" class="whitespace-nowrap px-3.5 py-1.5 rounded-full bg-white border border-pinktheme-200 text-pinktheme-800 text-xs font-bold shrink-0">Accessories</button>
+</div>
+
+            <!-- CATEGORY NAV MENU -->
+            <!-- CATEGORY NAV MENU WITH DROPDOWN -->
+<!-- CATEGORY NAV MENU WITH DROPDOWNS -->
+<!-- CATEGORY NAV MENU WITH DROPDOWNS -->
+<nav class="hidden lg:flex items-center justify-between border-t border-pinktheme-200/80 py-2.5 text-xs font-bold text-pinktheme-700 relative">
+    <a href="#catalog" onclick="filterCategory('all')" class="hover:text-pinktheme-500 transition py-1">Shop All</a>
+   
+
+    <!-- iPhone Category Dropdown -->
+    <div class="relative group py-1">
+        <a href="#catalog" onclick="filterCategory('smartphones')" class="hover:text-pinktheme-500 transition flex items-center gap-1.5 cursor-pointer py-1">
+            iPhone
+            <i class="fa-solid fa-chevron-down text-[9px] text-pinktheme-400 group-hover:rotate-180 transition-transform duration-200"></i>
+        </a>
+
+        <div class="absolute left-0 top-full mt-1 w-52 bg-white border border-pinktheme-200 rounded-2xl shadow-xl py-2 hidden group-hover:block z-50 transition-all">
+            <a href="#catalog" onclick="filterCategory('smartphones')" class="block px-4 py-2 text-xs font-extrabold text-pinktheme-900 hover:bg-pinktheme-100/60 transition">View all iPhone</a>
+            <div class="h-px bg-pinktheme-200/60 my-1 mx-3"></div>
+            <a href="#catalog" onclick="filterCategory('smartphones')" class="block px-4 py-1.5 text-xs text-pinktheme-800 hover:bg-pinktheme-100/60 transition">iPhone 18 Pro</a>
+            <a href="#catalog" onclick="filterCategory('smartphones')" class="block px-4 py-1.5 text-xs text-pinktheme-800 hover:bg-pinktheme-100/60 transition">iPhone Duo</a>
+            <a href="#catalog" onclick="filterCategory('smartphones')" class="block px-4 py-1.5 text-xs text-pinktheme-800 hover:bg-pinktheme-100/60 transition">iPhone 17 Pro</a>
+            <a href="#catalog" onclick="filterCategory('smartphones')" class="block px-4 py-1.5 text-xs text-pinktheme-800 hover:bg-pinktheme-100/60 transition">iPhone 17</a>
+            <a href="#catalog" onclick="filterCategory('smartphones')" class="block px-4 py-1.5 text-xs text-pinktheme-800 hover:bg-pinktheme-100/60 transition">iPhone 17e</a>
+            <a href="#catalog" onclick="filterCategory('smartphones')" class="block px-4 py-1.5 text-xs text-pinktheme-800 hover:bg-pinktheme-100/60 transition">iPhone Air</a>
+            <a href="#catalog" onclick="filterCategory('smartphones')" class="block px-4 py-1.5 text-xs text-pinktheme-800 hover:bg-pinktheme-100/60 transition">iPhone 16</a>
+            <a href="#catalog" onclick="filterCategory('smartphones')" class="block px-4 py-1.5 text-xs text-pinktheme-800 hover:bg-pinktheme-100/60 transition">iPhone 15</a>
+            <a href="#catalog" onclick="filterCategory('smartphones')" class="block px-4 py-1.5 text-xs text-pinktheme-800 hover:bg-pinktheme-100/60 transition">iPhone 14</a>
+            <div class="h-px bg-pinktheme-200/60 my-1 mx-3"></div>
+            <a href="#catalog" onclick="filterCategory('accessories')" class="block px-4 py-2 text-xs font-semibold text-pinktheme-700 hover:bg-pinktheme-100/60 transition">iPhone Accessories</a>
+        </div>
+    </div>
+
+    <!-- iPad Category Dropdown -->
+    <div class="relative group py-1">
+        <a href="#catalog" onclick="filterCategory('tablets')" class="hover:text-pinktheme-500 transition flex items-center gap-1.5 cursor-pointer py-1">
+            iPad
+            <i class="fa-solid fa-chevron-down text-[9px] text-pinktheme-400 group-hover:rotate-180 transition-transform duration-200"></i>
+        </a>
+
+        <div class="absolute left-0 top-full mt-1 w-48 bg-white border border-pinktheme-200 rounded-2xl shadow-xl py-2 hidden group-hover:block z-50 transition-all">
+            <a href="#catalog" onclick="filterCategory('tablets')" class="block px-4 py-2 text-xs font-extrabold text-pinktheme-900 hover:bg-pinktheme-100/60 transition">View all iPad</a>
+            <div class="h-px bg-pinktheme-200/60 my-1 mx-3"></div>
+            <a href="#catalog" onclick="filterCategory('tablets')" class="block px-4 py-1.5 text-xs text-pinktheme-800 hover:bg-pinktheme-100/60 transition">iPad Pro</a>
+            <a href="#catalog" onclick="filterCategory('tablets')" class="block px-4 py-1.5 text-xs text-pinktheme-800 hover:bg-pinktheme-100/60 transition">iPad Air</a>
+            <a href="#catalog" onclick="filterCategory('tablets')" class="block px-4 py-1.5 text-xs text-pinktheme-800 hover:bg-pinktheme-100/60 transition">iPad mini</a>
+            <a href="#catalog" onclick="filterCategory('tablets')" class="block px-4 py-1.5 text-xs text-pinktheme-800 hover:bg-pinktheme-100/60 transition">iPad</a>
+            <div class="h-px bg-pinktheme-200/60 my-1 mx-3"></div>
+            <a href="#catalog" onclick="filterCategory('accessories')" class="block px-4 py-2 text-xs font-semibold text-pinktheme-700 hover:bg-pinktheme-100/60 transition">iPad Accessories</a>
+        </div>
+    </div>
+
+    <a href="#catalog" onclick="filterCategory('laptops')" class="hover:text-pinktheme-500 transition py-1">Laptops & PCs</a>
+
+    <!-- Watch Category Dropdown -->
+    <div class="relative group py-1">
+        <a href="#catalog" onclick="filterCategory('smartwatches')" class="hover:text-pinktheme-500 transition flex items-center gap-1.5 cursor-pointer py-1">
+            Watch
+            <i class="fa-solid fa-chevron-down text-[9px] text-pinktheme-400 group-hover:rotate-180 transition-transform duration-200"></i>
+        </a>
+
+        <div class="absolute left-0 top-full mt-1 w-52 bg-white border border-pinktheme-200 rounded-2xl shadow-xl py-2 hidden group-hover:block z-50 transition-all">
+            <a href="#catalog" onclick="filterCategory('smartwatches')" class="block px-4 py-2 text-xs font-extrabold text-pinktheme-900 hover:bg-pinktheme-100/60 transition">View all Watch</a>
+            <div class="h-px bg-pinktheme-200/60 my-1 mx-3"></div>
+            <a href="#catalog" onclick="filterCategory('smartwatches')" class="block px-4 py-1.5 text-xs text-pinktheme-800 hover:bg-pinktheme-100/60 transition">Apple Watch Ultra 4</a>
+            <a href="#catalog" onclick="filterCategory('smartwatches')" class="block px-4 py-1.5 text-xs text-pinktheme-800 hover:bg-pinktheme-100/60 transition">Apple Watch Series 12</a>
+            <a href="#catalog" onclick="filterCategory('smartwatches')" class="block px-4 py-1.5 text-xs text-pinktheme-800 hover:bg-pinktheme-100/60 transition">Apple Watch Ultra 3</a>
+            <a href="#catalog" onclick="filterCategory('smartwatches')" class="block px-4 py-1.5 text-xs text-pinktheme-800 hover:bg-pinktheme-100/60 transition">Apple Watch Series 11</a>
+            <a href="#catalog" onclick="filterCategory('smartwatches')" class="block px-4 py-1.5 text-xs text-pinktheme-800 hover:bg-pinktheme-100/60 transition">Apple Watch SE</a>
+            <div class="h-px bg-pinktheme-200/60 my-1 mx-3"></div>
+            <a href="#catalog" onclick="filterCategory('accessories')" class="block px-4 py-2 text-xs font-semibold text-pinktheme-700 hover:bg-pinktheme-100/60 transition">Apple Watch Accessories</a>
+        </div>
+    </div>
+
+    <a href="#catalog" onclick="filterCategory('audio')" class="hover:text-pinktheme-500 transition py-1">iPhone Pre-Owned</a>
+    <a href="#catalog" onclick="filterCategory('accessories')" class="hover:text-pinktheme-500 transition py-1">Accessories & Chargers</a>
+    <!-- Change this -->
+<a href="support.html" class="hover:text-pinktheme-500 transition py-1">Support</a>
+<a href="about.html" class="hover:text-pinktheme-600 transition">About Us</a>
+    
+    
+</nav>
+            <!-- MOBILE SEARCH BAR -->
+            <div class="pb-3 md:hidden">
+                <div class="relative w-full">
+                    <input type="text" oninput="handleSearch(this.value)" placeholder="Search gadgets..." 
+                        class="w-full pl-9 pr-4 py-2 bg-white border border-pinktheme-200 rounded-full text-xs text-pinktheme-800 focus:outline-none focus:border-pinktheme-400">
+                    <i class="fa-solid fa-magnifying-glass absolute left-3 top-2.5 text-pinktheme-500 text-xs"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div id="storefrontView">
+
+        <!-- HERO CAROUSEL -->
+<!-- HERO CAROUSEL -->
+    <section class="bg-[#F5F5F7] py-4 sm:py-6">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6">
+            <div class="relative">
+                <!-- Floating Hero Card Frame -->
+                <div id="heroSlider" class="relative w-full min-h-[350px] sm:min-h-[420px] md:min-h-[480px] rounded-3xl overflow-hidden shadow-sm flex items-center justify-center">
+                    <!-- Banner injected by JS -->
+                </div>
+
+                <!-- Navigation Dots -->
+                <div id="heroDots" class="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 flex items-center justify-center gap-2">
+                    <!-- Navigation dots injected by JS -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+        <!-- PRODUCT CATALOG SECTION -->
+        <!-- MAIN CONTENT SECTION (POWER MAC CENTER STYLE) -->
+<main id="catalog" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-16">
+
+    <!-- 1. VIEW ALL PRODUCTS (CATEGORY GRID WITH STARTING PRICES) -->
+    <section>
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-gray-900 mb-8">View all products.</h2>
+        <div class="grid grid-cols-4 sm:grid-cols-4 md:grid-cols-8 gap-4 text-center">
+            
+            <button onclick="filterCategory('smartphones')" class="group flex flex-col items-center p-3 rounded-2xl hover:bg-gray-100 transition">
+                <div class="w-14 h-14 mb-2 flex items-center justify-center">
+                    <svg class="w-8 h-8 text-gray-800 group-hover:scale-110 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+                </div>
+                <span class="text-xs font-bold text-gray-900">iPhone</span>
+                <span class="text-[10px] text-gray-500 mt-0.5">From ₱24,990</span>
+            </button>
+
+            <button onclick="filterCategory('tablets')" class="group flex flex-col items-center p-3 rounded-2xl hover:bg-gray-100 transition">
+                <div class="w-14 h-14 mb-2 flex items-center justify-center">
+                    <svg class="w-8 h-8 text-gray-800 group-hover:scale-110 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 18h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+                </div>
+                <span class="text-xs font-bold text-gray-900">iPad</span>
+                <span class="text-[10px] text-gray-500 mt-0.5">From ₱18,990</span>
+            </button>
+
+            <button onclick="filterCategory('laptops')" class="group flex flex-col items-center p-3 rounded-2xl hover:bg-gray-100 transition">
+                <div class="w-14 h-14 mb-2 flex items-center justify-center">
+                    <svg class="w-8 h-8 text-gray-800 group-hover:scale-110 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                </div>
+                <span class="text-xs font-bold text-gray-900">Mac</span>
+                <span class="text-[10px] text-gray-500 mt-0.5">From ₱36,990</span>
+            </button>
+
+            <button onclick="filterCategory('smartwatches')" class="group flex flex-col items-center p-3 rounded-2xl hover:bg-gray-100 transition">
+                <div class="w-14 h-14 mb-2 flex items-center justify-center">
+                    <svg class="w-8 h-8 text-gray-800 group-hover:scale-110 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                </div>
+                <span class="text-xs font-bold text-gray-900">WATCH</span>
+                <span class="text-[10px] text-gray-500 mt-0.5">From ₱9,000</span>
+            </button>
+
+            <button onclick="filterCategory('audio')" class="group flex flex-col items-center p-3 rounded-2xl hover:bg-gray-100 transition">
+                <div class="w-14 h-14 mb-2 flex items-center justify-center">
+                    <svg class="w-8 h-8 text-gray-800 group-hover:scale-110 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 .895-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 .895-2 3-2 3 .895 3 2zM9 10l12-3"/></svg>
+                </div>
+                <span class="text-xs font-bold text-gray-900">Music</span>
+                <span class="text-[10px] text-gray-500 mt-0.5">From ₱8,190</span>
+            </button>
+
+            <button onclick="filterCategory('tv')" class="group flex flex-col items-center p-3 rounded-2xl hover:bg-gray-100 transition">
+                <div class="w-14 h-14 mb-2 flex items-center justify-center">
+                    <svg class="w-8 h-8 text-gray-800 group-hover:scale-110 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 4v16M17 4v16M3 8h4m10 0h4M3 12h18M3 16h4m10 0h4M4 20h16a1 1 0 001-1V5a1 1 0 00-1-1H4a1 1 0 00-1 1v14a1 1 0 001 1z"/></svg>
+                </div>
+                <span class="text-xs font-bold text-gray-900">TV & Home</span>
+                <span class="text-[10px] text-gray-500 mt-0.5">From ₱8,000</span>
+            </button>
+
+            <button onclick="filterCategory('accessories')" class="group flex flex-col items-center p-3 rounded-2xl hover:bg-gray-100 transition">
+                <div class="w-14 h-14 mb-2 flex items-center justify-center">
+                    <svg class="w-8 h-8 text-gray-800 group-hover:scale-110 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                </div>
+                <span class="text-xs font-bold text-gray-900">Accessories</span>
+                <span class="text-[10px] text-gray-500 mt-0.5">From ₱100</span>
+            </button>
+
+            <button onclick="filterCategory('airtag')" class="group flex flex-col items-center p-3 rounded-2xl hover:bg-gray-100 transition">
+                <div class="w-14 h-14 mb-2 flex items-center justify-center">
+                    <svg class="w-8 h-8 text-gray-800 group-hover:scale-110 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                </div>
+                <span class="text-xs font-bold text-gray-900">AirTag</span>
+                <span class="text-[10px] text-gray-500 mt-0.5">From ₱1,890</span>
+            </button>
+
+        </div>
+    </section>
+
+    <!-- 2. SEE WHAT'S NEW (FEATURED NEW RELEASES GRID) -->
+    <section>
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-gray-900 mb-8">See what's new.</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-6">
+            
+            <!-- Card 1 -->
+            <div class="bg-[#F9F9FB] rounded-3xl p-6 flex flex-col justify-between hover:shadow-lg transition duration-300 border border-gray-100">
+                <div class="h-40 flex items-center justify-center mb-4">
+                    <img src="iphoneduo.webp" alt="iPhone Duo" class="max-h-32 object-contain"/>
+                </div>
+                <div>
+                    <span class="text-[10px] font-extrabold uppercase text-orange-600 tracking-wider">NEW PRE-ORDER</span>
+                    <h3 class="text-base font-bold text-gray-900 mt-1">iPhone Duo</h3>
+                    <p class="text-xs text-gray-500 mt-1">Hello, hello.</p>
+                    <p class="text-xs text-gray-700 font-medium mt-4">Pre-order. Starts at <span class="font-bold">₱159,990</span>.</p>
+                </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="bg-[#F9F9FB] rounded-3xl p-6 flex flex-col justify-between hover:shadow-lg transition duration-300 border border-gray-100">
+                <div class="h-40 flex items-center justify-center mb-4">
+                    <img src="iphone18.webp" alt="iPhone 18 Pro" class="max-h-32 object-contain"/>
+                </div>
+                <div>
+                    <span class="text-[10px] font-extrabold uppercase text-orange-600 tracking-wider">NEW</span>
+                    <h3 class="text-base font-bold text-gray-900 mt-1">iPhone 18 Pro</h3>
+                    <p class="text-xs text-gray-500 mt-1">Pro further.</p>
+                    <p class="text-xs text-gray-700 font-medium mt-4">Buy now. Starts at <span class="font-bold">₱94,990</span>.</p>
+                </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="bg-[#F9F9FB] rounded-3xl p-6 flex flex-col justify-between hover:shadow-lg transition duration-300 border border-gray-100">
+                <div class="h-40 flex items-center justify-center mb-4">
+                    <img src="airpods5.webp" alt="AirPods 5" class="max-h-32 object-contain rounded-xl"/>
+                </div>
+                <div>
+                    <span class="text-[10px] font-extrabold uppercase text-orange-600 tracking-wider">NEW</span>
+                    <h3 class="text-base font-bold text-gray-900 mt-1">AirPods 5</h3>
+                    <p class="text-xs text-gray-500 mt-1">Discover Active Noise Cancellation.</p>
+                    <p class="text-xs text-gray-700 font-medium mt-4">Buy now. Starts at <span class="font-bold">₱9,490</span>.</p>
+                </div>
+            </div>
+
+            <!-- Card 4 -->
+            <div class="bg-[#F9F9FB] rounded-3xl p-6 flex flex-col justify-between hover:shadow-lg transition duration-300 border border-gray-100">
+                <div class="h-40 flex items-center justify-center mb-4">
+                    <img src="watchultra4.webp" alt="WATCH Ultra 4" class="max-h-32 object-contain rounded-xl"/>
+                </div>
+                <div>
+                    <span class="text-[10px] font-extrabold uppercase text-orange-600 tracking-wider">NEW</span>
+                    <h3 class="text-base font-bold text-gray-900 mt-1">WATCH Ultra 4</h3>
+                    <p class="text-xs text-gray-500 mt-1">A battery you can't outrun.</p>
+                    <p class="text-xs text-gray-700 font-medium mt-4">Buy now. Starts at <span class="font-bold">₱59,990</span>.</p>
+                </div>
+            </div>
+
+            <!-- Card 5 -->
+            <div class="bg-[#F9F9FB] rounded-3xl p-6 flex flex-col justify-between hover:shadow-lg transition duration-300 border border-gray-100">
+                <div class="h-40 flex items-center justify-center mb-4">
+                    <img src="watchseries12.webp" alt="WATCH Series 12" class="max-h-32 object-contain rounded-xl"/>
+                </div>
+                <div>
+                    <span class="text-[10px] font-extrabold uppercase text-orange-600 tracking-wider">NEW</span>
+                    <h3 class="text-base font-bold text-gray-900 mt-1">WATCH Series 12</h3>
+                    <p class="text-xs text-gray-500 mt-1">A work of heart.</p>
+                    <p class="text-xs text-gray-700 font-medium mt-4">Buy now. Starts at <span class="font-bold">₱28,990</span>.</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 3. VIEW IN-STORE CLASSES AND SUPPORT -->
+    <section>
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-gray-900 mb-8">View in-store classes and support.</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-6">
+            
+            <div class="bg-[#F9F9FB] rounded-3xl p-6 flex flex-col justify-between border border-gray-100 hover:shadow-md transition">
+                <div>
+                    <span class="text-[10px] font-extrabold uppercase text-gray-400 tracking-wider">PICK UP IN-STORE</span>
+                    <h4 class="text-sm font-bold text-gray-900 mt-2 leading-snug">Pick up your online order at select stores.</h4>
+                </div>
+            </div>
+
+            <div class="bg-[#F9F9FB] rounded-3xl p-6 flex flex-col justify-between border border-gray-100 hover:shadow-md transition">
+                <div>
+                    <span class="text-[10px] font-extrabold uppercase text-blue-600 tracking-wider">UPTRADE PROGRAM</span>
+                    <h4 class="text-sm font-bold text-gray-900 mt-2 leading-snug">Trade in your device to save on the upgrade.</h4>
+                </div>
+            </div>
+
+            <div class="bg-[#F9F9FB] rounded-3xl p-6 flex flex-col justify-between border border-gray-100 hover:shadow-md transition">
+                <div>
+                    <span class="text-[10px] font-extrabold uppercase text-gray-400 tracking-wider">BASECAMP</span>
+                    <h4 class="text-sm font-bold text-gray-900 mt-2 leading-snug">Learn how to maximize Apple technology.</h4>
+                </div>
+            </div>
+
+            <div class="bg-[#F9F9FB] rounded-3xl p-6 flex flex-col justify-between border border-gray-100 hover:shadow-md transition">
+                <div>
+                    <span class="text-[10px] font-extrabold uppercase text-blue-600 tracking-wider">MOBILE CARE</span>
+                    <h4 class="text-sm font-bold text-gray-900 mt-2 leading-snug">Get premium service and repair support.</h4>
+                </div>
+            </div>
+
+            <div class="bg-[#F9F9FB] rounded-3xl p-6 flex flex-col justify-between border border-gray-100 hover:shadow-md transition">
+                <div>
+                    <span class="text-[10px] font-extrabold uppercase text-gray-400 tracking-wider">FREE TRAINING</span>
+                    <h4 class="text-sm font-bold text-gray-900 mt-2 leading-snug">Group Training: Learn more about Apple.</h4>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 4. FULL CATALOG PRODUCTS GRID -->
+    <section class="pt-8 border-t border-gray-200">
+        <div class="flex items-center justify-between mb-8">
+            <h2 class="text-2xl font-extrabold text-gray-900">All Products</h2>
+            <div class="flex items-center gap-2">
+                <label for="sortSelect" class="text-xs font-bold text-gray-600">Sort:</label>
+                <select id="sortSelect" onchange="handleSortChange(this.value)" class="bg-white border border-gray-200 text-gray-800 text-xs font-bold rounded-xl px-3 py-2 focus:outline-none focus:border-gray-400 shadow-sm cursor-pointer">
+                    <option value="featured">Featured Gadgets</option>
+                    <option value="price-low">Price: Low to High</option>
+                    <option value="price-high">Price: High to Low</option>
+                    <option value="rating">Highest Rated</option>
+                </select>
+            </div>
+        </div>
+
+        <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+            <!-- Dynamically populated via renderProducts() -->
+        </div>
+    </section>
+
+</main>
+
+<!-- ================= CUSTOMER SUPPORT SECTION ================= -->
+
+
+        <!-- FOOTER -->
+        <footer class="bg-pinktheme-100/60 border-t border-pinktheme-200 text-pinktheme-800 text-xs py-12">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                    <div class="space-y-3">
+                        <div class="flex items-center gap-2 text-pinktheme-800 font-extrabold text-base">
+                            <i class="fa-solid fa-spa text-pinktheme-500"></i> Kate's Original Gadgets
+                        </div>
+                        <p class="text-xs text-pinktheme-700/80 leading-relaxed font-medium">
+                            Your trusted gadget store, now with full store pickup and delivery nationwide! Authentic smartphones, audio gear, and tech accessories with store warranty.
+                        </p>
+                    </div>
+                    <div>
+                        <h4 class="font-extrabold text-pinktheme-800 uppercase text-[11px] mb-3">Store Locations</h4>
+                        <ul class="space-y-2 text-pinktheme-800/80">
+                            <li><a href="#" onclick="openStoreModal(); return false;" class="hover:text-pinktheme-600">Greenhills Promenade Flagship</a></li>
+                            <li><a href="#" onclick="openStoreModal(); return false;" class="hover:text-pinktheme-600">SM Megamall Cyberzone</a></li>
+                            <li><a href="#" onclick="openStoreModal(); return false;" class="hover:text-pinktheme-600">SM Mall of Asia Branch</a></li>
+                            <li><a href="#" onclick="openStoreModal(); return false;" class="hover:text-pinktheme-600">SM Lanang Premier Davao</a></li>
+                            <li><a href="#" onclick="openStoreModal(); return false;" class="hover:text-pinktheme-600">Abreeza Mall Davao Branch</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-extrabold text-pinktheme-800 uppercase text-[11px] mb-3">Accepted Payments</h4>
+                        <div class="flex flex-wrap gap-2 text-pinktheme-800 font-bold text-xs">
+                            <span class="px-2.5 py-1 bg-white rounded-md border border-pinktheme-200">Cash on Delivery (COD)</span>
+                            <span class="px-2.5 py-1 bg-white rounded-md border border-pinktheme-200">In-Store Cash/Card</span>
+                            <span class="px-2.5 py-1 bg-white rounded-md border border-pinktheme-200">GCash / PayMaya</span>
+                            <span class="px-2.5 py-1 bg-white rounded-md border border-pinktheme-200">Bank Transfer</span>
+                        </div>
+                    </div>
+                    <div>
+    <h4 class="font-extrabold text-pinktheme-800 uppercase text-[11px] mb-3">CUSTOMER SUPPORT</h4>
+    
+    <!-- Tap-to-call Phone Number -->
+    <a href="tel:09558844392" class="flex items-center gap-2 text-xs font-bold text-pinktheme-800 hover:text-pinktheme-900 transition mb-3 group">
+        <div class="w-6 h-6 rounded-lg bg-white border border-pinktheme-200 flex items-center justify-center text-pinktheme-700 group-hover:bg-pinktheme-700 group-hover:text-white transition">
+            <i class="fa-solid fa-phone text-[10px]"></i>
+        </div>
+        <span>0955 884 4392</span>
+    </a>
+
+    <!-- Messenger Button -->
+    <a href="https://m.me/katesoriginalgadgets" target="_blank" class="inline-flex items-center gap-2 px-4 py-2.5 bg-pinktheme-800 text-white rounded-xl font-bold text-xs shadow-sm hover:bg-pinktheme-700 transition">
+        <i class="fa-brands fa-facebook-messenger"></i> Message Kate's Gadgets
+    </a>
+</div>
+                </div>
+                <div class="border-t border-pinktheme-200 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-pinktheme-700/70 text-[11px]">
+                    <p>&copy; 2026 Kate's Original Gadgets. All rights reserved.</p>
+                    <a href="dashboard.html" class="hover:text-pinktheme-600 font-semibold"><i class="fa-solid fa-lock text-[9px]"></i> Staff Dashboard</a>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+
+
+    <!-- 1. POWER MAC STYLE "SELECT STORE" MODAL -->
+    <div id="storeModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 modal-backdrop transition-opacity duration-300 opacity-0">
+        <div class="bg-white w-full max-w-2xl rounded-3xl shadow-2xl overflow-hidden border border-pinktheme-200 transform scale-95 transition-transform duration-300 flex flex-col max-h-[90vh]" id="storeModalContent">
+            
+            <!-- HEADER -->
+            <div class="bg-gradient-to-r from-pinktheme-200 via-pinktheme-100 to-pinktheme-200 p-6 text-pinktheme-800 relative border-b border-pinktheme-200 shrink-0">
+                <button onclick="closeStoreModal()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-white/60 hover:bg-white text-pinktheme-800 flex items-center justify-center transition">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-pinktheme-300 flex items-center justify-center text-pinktheme-800 font-bold text-lg shadow-sm border border-white">
+                        <i class="fa-solid fa-store"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-base font-extrabold text-pinktheme-800">Select Store or Fulfillment</h3>
+                        <p class="text-xs text-pinktheme-700">Choose your preferred branch for store pickup or home delivery</p>
+                    </div>
+                </div>
+
+                
+                
+            </div>
+
+            <!-- SEARCH AND STORE LIST -->
+            <div class="p-6 flex-1 flex flex-col min-h-0 overflow-hidden bg-white space-y-4">
+                <div class="relative">
+                    <input type="text" oninput="filterStores(this.value)" placeholder="Search store location or branch name (e.g. Greenhills, SM Lanang, Megamall)..." 
+                        class="w-full pl-10 pr-4 py-2.5 bg-pinktheme-50 border border-pinktheme-200 rounded-xl text-xs text-pinktheme-800 placeholder-pinktheme-600/50 focus:outline-none focus:bg-white focus:border-pinktheme-400 shadow-sm">
+                    <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3 text-pinktheme-500 text-xs"></i>
+                </div>
+
+                <div id="storeListContainer" class="flex-1 overflow-y-auto space-y-3 pr-1">
+                    <!-- Dynamically populated store list -->
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- 2. AUTH MODAL -->
+    <div id="authModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 modal-backdrop transition-opacity duration-300 opacity-0">
+        <div class="bg-white w-full max-w-md rounded-3xl shadow-2xl overflow-hidden border border-pinktheme-200 transform scale-95 transition-transform duration-300" id="authModalContent">
+            
+            <div class="bg-gradient-to-r from-pinktheme-200 via-pinktheme-100 to-pinktheme-200 p-6 text-pinktheme-800 relative border-b border-pinktheme-200">
+                <button onclick="closeAuthModal()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-white/60 hover:bg-white text-pinktheme-800 flex items-center justify-center transition">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-pinktheme-300 flex items-center justify-center text-pinktheme-800 font-bold text-lg shadow-sm border border-white">
+                        <i class="fa-solid fa-user-lock"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-base font-extrabold text-pinktheme-800" id="authModalTitle">Sign In to Kate's Original Gadgets</h3>
+                        <p class="text-xs text-pinktheme-700">Track orders, save wishlist & get discounts</p>
+                    </div>
+                </div>
+
+                <div class="flex border-b border-pinktheme-300 mt-6 -mb-6">
+                    <button id="tabBtnLogin" onclick="switchAuthTab('login')" class="flex-1 py-2 text-center text-xs font-bold border-b-2 border-pinktheme-700 text-pinktheme-800 transition">
+                        Sign In
+                    </button>
+                    <button id="tabBtnSignup" onclick="switchAuthTab('signup')" class="flex-1 py-2 text-center text-xs font-bold border-b-2 border-transparent text-pinktheme-600 hover:text-pinktheme-800 transition">
+                        Register Account
+                    </button>
+                </div>
+            </div>
+
+            <div class="p-6 pt-8 bg-white">
+                <div class="mb-5 p-3 bg-pinktheme-50 border border-pinktheme-200 rounded-2xl flex items-center justify-between text-xs">
+                    <div>
+                        <span class="block font-bold text-pinktheme-800">Demo Accounts:</span>
+                        <span class="block text-[10px] text-pinktheme-700/70">Click to auto-fill credentials:</span>
+                    </div>
+                    <div class="flex gap-1.5">
+                        <button onclick="fillDemoUser('kate')" class="px-2.5 py-1 bg-pinktheme-700 text-white text-[10px] font-bold rounded-lg shadow-sm hover:bg-pinktheme-800">
+                            Kate (VIP)
+                        </button>
+                        <button onclick="fillDemoUser('alex')" class="px-2.5 py-1 bg-pinktheme-300 text-pinktheme-800 text-[10px] font-bold rounded-lg shadow-sm hover:bg-pinktheme-400">
+                            Alex (Customer)
+                        </button>
+                    </div>
+                </div>
+
+                <!-- SIGN IN FORM -->
+                <form id="loginForm" onsubmit="handleLoginSubmit(event)" class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-bold text-pinktheme-800 mb-1">Email Address</label>
+                        <div class="relative">
+                            <input type="email" id="loginEmail" required placeholder="kate@katesgadgets.ph" 
+                                class="w-full pl-9 pr-4 py-2.5 bg-pinktheme-50 border border-pinktheme-200 rounded-xl text-xs text-pinktheme-800 focus:outline-none focus:bg-white focus:border-pinktheme-400">
+                            <i class="fa-regular fa-envelope absolute left-3 top-3 text-pinktheme-500 text-xs"></i>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="flex items-center justify-between mb-1">
+                            <label class="block text-xs font-bold text-pinktheme-800">Password</label>
+                            <a href="#" onclick="showToast('Password reset link sent to your email!', 'info'); return false;" class="text-[11px] font-semibold text-pinktheme-600 hover:underline">Forgot password?</a>
+                        </div>
+                        <div class="relative">
+                            <input type="password" id="loginPassword" required placeholder="••••••••" 
+                                class="w-full pl-9 pr-10 py-2.5 bg-pinktheme-50 border border-pinktheme-200 rounded-xl text-xs text-pinktheme-800 focus:outline-none focus:bg-white focus:border-pinktheme-400">
+                            <i class="fa-solid fa-lock absolute left-3 top-3 text-pinktheme-500 text-xs"></i>
+                            <button type="button" onclick="togglePasswordVisibility('loginPassword', this)" class="absolute right-3 top-2.5 text-pinktheme-500 hover:text-pinktheme-800">
+                                <i class="fa-regular fa-eye text-xs"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="w-full py-3 bg-pinktheme-700 hover:bg-pinktheme-800 text-white font-bold text-xs rounded-xl shadow-md transition flex items-center justify-center gap-2">
+                        <span>Sign In Now</span>
+                        <i class="fa-solid fa-right-to-bracket"></i>
+                    </button>
+                </form>
+
+                <!-- REGISTER FORM -->
+                <form id="signupForm" onsubmit="handleSignupSubmit(event)" class="space-y-4 hidden">
+                    <div>
+                        <label class="block text-xs font-bold text-pinktheme-800 mb-1">Full Name</label>
+                        <div class="relative">
+                            <input type="text" id="signupName" required placeholder="e.g. Maria Santos" 
+                                class="w-full pl-9 pr-4 py-2.5 bg-pinktheme-50 border border-pinktheme-200 rounded-xl text-xs text-pinktheme-800 focus:outline-none focus:bg-white focus:border-pinktheme-400">
+                            <i class="fa-regular fa-user absolute left-3 top-3 text-pinktheme-500 text-xs"></i>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-pinktheme-800 mb-1">Email Address</label>
+                        <div class="relative">
+                            <input type="email" id="signupEmail" required placeholder="maria@example.ph" 
+                                class="w-full pl-9 pr-4 py-2.5 bg-pinktheme-50 border border-pinktheme-200 rounded-xl text-xs text-pinktheme-800 focus:outline-none focus:bg-white focus:border-pinktheme-400">
+                            <i class="fa-regular fa-envelope absolute left-3 top-3 text-pinktheme-500 text-xs"></i>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-pinktheme-800 mb-1">Create Password</label>
+                        <div class="relative">
+                            <input type="password" id="signupPassword" minlength="6" required placeholder="Minimum 6 characters" 
+                                class="w-full pl-9 pr-10 py-2.5 bg-pinktheme-50 border border-pinktheme-200 rounded-xl text-xs text-pinktheme-800 focus:outline-none focus:bg-white focus:border-pinktheme-400">
+                            <i class="fa-solid fa-key absolute left-3 top-3 text-pinktheme-500 text-xs"></i>
+                            <button type="button" onclick="togglePasswordVisibility('signupPassword', this)" class="absolute right-3 top-2.5 text-pinktheme-500 hover:text-pinktheme-800">
+                                <i class="fa-regular fa-eye text-xs"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="w-full py-3 bg-pinktheme-600 hover:bg-pinktheme-700 text-white font-bold text-xs rounded-xl shadow-md transition flex items-center justify-center gap-2">
+                        <span>Create Account</span>
+                        <i class="fa-solid fa-user-plus"></i>
+                    </button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- 3. PROFILE MODAL -->
+    <div id="profileModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 modal-backdrop transition-opacity duration-300 opacity-0">
+        <div class="bg-white w-full max-w-xl rounded-3xl shadow-2xl overflow-hidden border border-pinktheme-200 transform scale-95 transition-transform duration-300">
+            <div class="bg-gradient-to-r from-pinktheme-200 via-pinktheme-100 to-pinktheme-200 p-6 text-pinktheme-800 relative flex items-center justify-between border-b border-pinktheme-200">
+                <div class="flex items-center gap-4">
+                    <img id="profileAvatar" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&q=80" alt="User Avatar" class="w-12 h-12 rounded-2xl object-cover border-2 border-white shadow-sm">
+                    <div>
+                        <h3 id="profileName" class="text-base font-extrabold text-pinktheme-800">Kate Miller</h3>
+                        <p id="profileEmail" class="text-xs text-pinktheme-700">kate@katesgadgets.ph</p>
+                        <span id="profileRoleBadge" class="inline-block mt-1 px-2 py-0.5 bg-pinktheme-300 text-pinktheme-800 text-[10px] font-bold rounded uppercase">VIP Founder</span>
+                    </div>
+                </div>
+                <button onclick="closeProfileModal()" class="w-8 h-8 rounded-full bg-white/60 hover:bg-white text-pinktheme-800 flex items-center justify-center">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <div class="p-6 space-y-5 bg-white">
+                <div class="grid grid-cols-2 gap-3 text-center">
+                    <div class="p-3 rounded-2xl bg-pinktheme-50 border border-pinktheme-200">
+                        <span class="block text-xs font-bold text-pinktheme-800">Completed Orders</span>
+                        <span class="text-lg font-black text-pinktheme-700">2</span>
+                    </div>
+                    <div class="p-3 rounded-2xl bg-pinktheme-50 border border-pinktheme-200">
+                        <span class="block text-xs font-bold text-pinktheme-800">Reward Points</span>
+                        <span class="text-lg font-black text-pinktheme-600">1,250 pts</span>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="text-xs font-extrabold text-pinktheme-800 mb-3 uppercase tracking-wider">Your Live Order Updates</h4>
+                    <div class="space-y-3">
+                        <div class="p-3.5 bg-pinktheme-50 rounded-2xl border border-pinktheme-200 flex items-center justify-between">
+                            <div>
+                                <span class="font-mono text-xs font-bold text-pinktheme-800">#KG-9013</span>
+                                <span class="ml-2 px-2 py-0.5 bg-emerald-100 text-emerald-800 text-[10px] font-bold rounded-full">IN TRANSIT VIA J&T</span>
+                                <p class="text-xs text-pinktheme-700/80 mt-1">1x Kate Ultra Smartwatch</p>
+                            </div>
+                            <span class="font-extrabold text-xs text-pinktheme-800">₱12,990.00</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pt-4 border-t border-pinktheme-200 flex items-center justify-between">
+                    <button onclick="handleLogout()" class="px-4 py-2 bg-red-50 hover:bg-red-100 text-red-600 text-xs font-bold rounded-xl transition flex items-center gap-1.5">
+                        <i class="fa-solid fa-arrow-right-from-bracket"></i> Sign Out
+                    </button>
+                    <button onclick="closeProfileModal()" class="px-5 py-2 bg-pinktheme-700 hover:bg-pinktheme-800 text-white text-xs font-bold rounded-xl">
+                        Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 4. CART DRAWER -->
+    <div id="cartDrawer" class="fixed inset-0 z-50 hidden modal-backdrop transition-opacity duration-300 opacity-0">
+        <div class="absolute right-0 top-0 bottom-0 w-full max-w-md bg-white shadow-2xl flex flex-col transform translate-x-full transition-transform duration-300" id="cartDrawerContent">
+            
+            <div class="p-5 border-b border-pinktheme-200 flex items-center justify-between bg-gradient-to-r from-pinktheme-200 via-pinktheme-100 to-pinktheme-200 text-pinktheme-800">
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-bag-shopping text-pinktheme-600"></i>
+                    <h3 class="font-bold text-sm text-pinktheme-800">Shopping Cart</h3>
+                    <span id="cartDrawerCountBadge" class="bg-pinktheme-300 text-pinktheme-800 text-[10px] font-bold px-2 py-0.5 rounded-full border border-white">0 items</span>
+                </div>
+                <button onclick="toggleCartDrawer()" class="w-8 h-8 rounded-full bg-white/60 hover:bg-white text-pinktheme-800 flex items-center justify-center">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <!-- FULFILLMENT MODE PILL IN CART -->
+            <div class="px-5 py-3 bg-pinktheme-100/80 border-b border-pinktheme-200 flex items-center justify-between text-xs">
+                <div class="flex items-center gap-2 text-pinktheme-800 font-bold truncate">
+                    <i class="fa-solid fa-store text-pinktheme-600"></i>
+                    <span class="truncate" id="cartFulfillmentLabel">Pickup: Greenhills Flagship</span>
+                </div>
+                <button onclick="toggleCartDrawer(); openStoreModal();" class="text-[11px] font-extrabold text-pinktheme-700 hover:underline shrink-0">
+                    Change
+                </button>
+            </div>
+
+            <div id="cartItemList" class="flex-1 p-5 overflow-y-auto space-y-3 bg-white">
+                <!-- Dynamically populated -->
+            </div>
+
+            <div class="p-5 border-t border-pinktheme-200 bg-pinktheme-50 space-y-3">
+                <div class="space-y-1.5 text-xs text-pinktheme-800">
+                    <div class="flex justify-between">
+                        <span>Subtotal</span>
+                        <span id="cartSubtotal" class="font-bold text-pinktheme-800">₱0.00</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span>Estimated Shipping / Fee</span>
+                        <span id="cartShipping" class="text-emerald-700 font-bold">FREE</span>
+                    </div>
+                    <div class="flex justify-between text-sm font-extrabold text-pinktheme-800 pt-2 border-t border-pinktheme-200">
+                        <span>Total</span>
+                        <span id="cartTotal" class="text-pinktheme-800">₱0.00</span>
+                    </div>
+                </div>
+
+                <button onclick="handleCheckout()" class="w-full py-3.5 bg-pinktheme-700 hover:bg-pinktheme-800 text-white font-bold text-xs rounded-xl shadow-md transition flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-credit-card"></i>
+                    <span>Checkout Order</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 5. WISHLIST DRAWER -->
+    <div id="wishlistDrawer" class="fixed inset-0 z-50 hidden modal-backdrop transition-opacity duration-300 opacity-0">
+        <div class="absolute right-0 top-0 bottom-0 w-full max-w-md bg-white shadow-2xl flex flex-col transform translate-x-full transition-transform duration-300" id="wishlistDrawerContent">
+            
+            <div class="p-5 border-b border-pinktheme-200 flex items-center justify-between bg-gradient-to-r from-pinktheme-200 via-pinktheme-100 to-pinktheme-200 text-pinktheme-800">
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-heart text-pinktheme-600"></i>
+                    <h3 class="font-bold text-sm text-pinktheme-800">My Saved Wishlist</h3>
+                    <span id="wishlistDrawerCountBadge" class="bg-pinktheme-300 text-pinktheme-800 text-[10px] font-bold px-2 py-0.5 rounded-full border border-white">0 items</span>
+                </div>
+                <button onclick="toggleWishlistModal()" class="w-8 h-8 rounded-full bg-white/60 hover:bg-white text-pinktheme-800 flex items-center justify-center">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <div id="wishlistItemList" class="flex-1 p-5 overflow-y-auto space-y-3 bg-white">
+                <!-- Dynamically populated -->
+            </div>
+
+            <div class="p-5 border-t border-pinktheme-200 bg-pinktheme-50 space-y-3">
+                <button onclick="addAllWishlistToCart()" class="w-full py-3.5 bg-pinktheme-700 hover:bg-pinktheme-800 text-white font-bold text-xs rounded-xl shadow-md transition flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-cart-plus"></i>
+                    <span>Add All Items to Cart</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 6. QUICK VIEW MODAL -->
+    <div id="quickViewModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 modal-backdrop transition-opacity duration-300 opacity-0">
+        <div class="bg-white w-full max-w-2xl rounded-3xl shadow-2xl overflow-hidden border border-pinktheme-200 transform scale-95 transition-transform duration-300 relative">
+            <button onclick="closeQuickView()" class="absolute top-4 right-4 z-10 w-8 h-8 rounded-full bg-pinktheme-100 hover:bg-pinktheme-200 text-pinktheme-800 flex items-center justify-center">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="grid grid-cols-1 md:grid-cols-2" id="quickViewContent">
+                <!-- Dynamically populated -->
+            </div>
+        </div>
+    </div>
+
+    <!-- TOAST CONTAINERS -->
+    <div id="toastContainer" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 pointer-events-none"></div>
+    
+
+    <script>
+        const STORES = [
+            {
+                id: 'delivery',
+                name: 'Standard Home Delivery',
+                region: 'Delivery',
+                address: 'Doorstep shipping via LBC / J&T Express',
+                hours: '2-5 Business Days',
+                phone: '1-800-KATE-GADGETS',
+                isDelivery: true,
+                badge: 'NATIONWIDE',
+                pickupTime: '2-5 Days'
+            },
+            {
+                id: 'greenhills',
+                name: 'Kate\'s Greenhills Flagship',
+                region: 'Metro Manila',
+                address: '2nd Floor, V-Mall, Greenhills Shopping Center, San Juan City',
+                hours: '10:00 AM - 8:00 PM Daily',
+                phone: '(02) 8721-9842',
+                isDelivery: false,
+                badge: 'MAIN HUB',
+                pickupTime: 'Ready in 2 Hours'
+            },
+            {
+                id: 'megamall',
+                name: 'Kate\'s SM Megamall Cyberzone',
+                region: 'Metro Manila',
+                address: '4th Floor, Cyberzone, Building B, SM Megamall, Mandaluyong City',
+                hours: '10:00 AM - 10:00 PM Daily',
+                phone: '(02) 8633-1120',
+                isDelivery: false,
+                badge: 'CYBERZONE',
+                pickupTime: 'Ready in 2 Hours'
+            },
+            {
+                id: 'moa',
+                name: 'Kate\'s SM Mall of Asia Store',
+                region: 'Metro Manila',
+                address: '2nd Level, North Parking Building, SM Mall of Asia, Pasay City',
+                hours: '10:00 AM - 10:00 PM Daily',
+                phone: '(02) 8556-0210',
+                isDelivery: false,
+                badge: 'POPULAR',
+                pickupTime: 'Ready in 3 Hours'
+            },
+            {
+                id: 'sm-lanang',
+                name: 'Kate\'s SM Lanang Premier Branch',
+                region: 'Mindanao',
+                address: '3rd Floor Cyberzone, J.P. Laurel Ave, Lanang, Davao City',
+                hours: '10:00 AM - 9:00 PM Daily',
+                phone: '(082) 285-8888',
+                isDelivery: false,
+                badge: 'DAVAO CITY',
+                pickupTime: 'Ready in 1 Hour'
+            },
+            {
+                id: 'abreeza',
+                name: 'Kate\'s Abreeza Mall Branch',
+                region: 'Mindanao',
+                address: '3rd Floor, Tech Wing, Abreeza Mall, J.P. Laurel Ave, Davao City',
+                hours: '10:00 AM - 9:00 PM Daily',
+                phone: '(082) 321-4470',
+                isDelivery: false,
+                badge: 'DAVAO CITY',
+                pickupTime: 'Ready in 1 Hour'
+            },
+            {
+                id: 'sm-ecoland',
+                name: 'Kate\'s SM City Davao (Ecoland)',
+                region: 'Mindanao',
+                address: '2nd Floor Cyberzone, Quimpo Blvd, Ecoland, Davao City',
+                hours: '10:00 AM - 9:00 PM Daily',
+                phone: '(082) 297-7777',
+                isDelivery: false,
+                badge: 'DAVAO CITY',
+                pickupTime: 'Ready in 2 Hours'
+            },
+            {
+                id: 'cebu',
+                name: 'Kate\'s SM City Cebu Branch',
+                region: 'Visayas',
+                address: '2nd Floor, Cyberzone, SM City Cebu, North Reclamation Area',
+                hours: '10:00 AM - 9:00 PM Daily',
+                phone: '(032) 231-5589',
+                isDelivery: false,
+                badge: 'VISAYAS HUB',
+                pickupTime: 'Ready in 2 Hours'
+            }
+        ];
+
+        const PRODUCTS = [
+            {
+                id: 1,
+                name: "iPhone 16 (Pre-Owned)",
+                category: "smartphones",
+                price: 45990,
+                originalPrice: 49990,
+                rating: 4.9,
+                reviewsCount: 128,
+                image: "iphone16.webp",
+                description: "Pre-owned iPhone 16 in excellent condition, store-tested with warranty.",
+                stock: 4,
+                badgeColor: "bg-pinktheme-600",
+                badge: "PRE-OWNED"
+            },
+            {
+                id: 2,
+                name: "2025 Apple Watch SE Sport Band (3rd Gen - Starlight)",
+                category: "smartwatches",
+                price: 15490,
+                originalPrice: 17990,
+                rating: 4.8,
+                reviewsCount: 184,
+                image: "watchse3.webp",
+                description: "Apple Watch SE with Sport Band in Starlight. Case: 44mm, GPS connectivity.",
+                stock: 9,
+                badgeColor: "bg-pinktheme-600",
+                badge: "POPULAR"
+            },
+            {
+                id: 3,
+                name: "AirPods Max (USB-C - Midnight)",
+                category: "audio",
+                price: 32990,
+                originalPrice: 35990,
+                rating: 4.9,
+                reviewsCount: 156,
+                image: "airpodmax2.webp",
+                description: "Over-ear headphones with Active Noise Cancellation. Port: USB-C, Color: Midnight.",
+                stock: 3,
+                badgeColor: "bg-pinktheme-600",
+                badge: "NEW"
+            },
+            {
+                id: 4,
+                name: "20W USB-C Power Adapter",
+                category: "accessories",
+                price: 990,
+                originalPrice: 1290,
+                rating: 4.8,
+                reviewsCount: 230,
+                image: "20wusbc.webp",
+                description: "Fast, efficient charging at home or on the go. Output: 20W, Port: USB-C.",
+                stock: 40,
+                badgeColor: "bg-pinktheme-600",
+                badge: "SALE"
+            },
+            {
+                id: 5,
+                name: "13-inch iPad Pro M5 (256GB Space Black)",
+                category: "tablets",
+                price: 109990,
+                originalPrice: 114990,
+                rating: 4.9,
+                reviewsCount: 88,
+                image: "ipadprom5.webp",
+                description: "The thinnest iPad with the M5 chip. Chip: M5, Storage: 256GB, Display: 13-inch.",
+                stock: 2,
+                badgeColor: "bg-pinktheme-600",
+                badge: "FEATURED"
+            },
+            {
+                id: 6,
+                name: "AirPods Pro 3",
+                category: "audio",
+                price: 14290,
+                originalPrice: 16990,
+                rating: 4.9,
+                reviewsCount: 142,
+                image: "airpodpro3.webp",
+                description: "Next-gen ANC with a better fit. ANC: Yes, Case: USB-C.",
+                stock: 0,
+                badgeColor: "bg-pinktheme-600",
+                badge: "SALE"
+            },
+        ];
+
+        // Catalog managed from dashboard.html (drafts stay hidden from the shop)
+        try {
+            const managed = JSON.parse(localStorage.getItem('kate_catalog'));
+            if (Array.isArray(managed)) {
+                PRODUCTS.splice(0, PRODUCTS.length, ...managed.filter(p => p.status !== 'draft').map(p => ({ badgeColor: 'bg-pinktheme-600', ...p })));
+            }
+        } catch (e) {}
+
+        const CATEGORIES = [
+            { id: 'all', label: 'All Products' },
+            { id: 'smartphones', label: 'Smartphones' },
+            { id: 'smartwatches', label: 'Smartwatches' },
+            { id: 'audio', label: 'Earphones & Audio' },
+            { id: 'tablets', label: 'Tablets' },
+            { id: 'accessories', label: 'Accessories' }
+        ];
+
+        const PRESET_USERS = {
+            'kate@katesgadgets.ph': {
+                name: 'Kate Miller',
+                email: 'kate@katesgadgets.ph',
+                password: 'password123',
+                avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&q=80',
+                role: 'VIP Founder'
+            },
+            'alex@example.ph': {
+                name: 'Alex Rivera',
+                email: 'alex@example.ph',
+                password: 'password123',
+                avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=150&q=80',
+                role: 'Verified Buyer'
+            }
+        };
+
+        let selectedStore = STORES[1]; // Default to Greenhills Flagship
+        let selectedRegionFilter = 'All';
+        let storeSearchQuery = '';
+
+        let currentUser = null;
+        let cart = [];
+        let wishlist = [];
+        let currentCategory = 'all';
+        let searchQuery = '';
+        let currentSort = 'featured';
+
+        function saveState() {
+            if (currentUser) localStorage.setItem('kate_user', JSON.stringify(currentUser));
+            else localStorage.removeItem('kate_user');
+
+            localStorage.setItem('kate_selected_store', selectedStore.id);
+            localStorage.setItem('kate_cart', JSON.stringify(cart));
+            localStorage.setItem('kate_wishlist', JSON.stringify(wishlist));
+        }
+
+        function updateWishlistUI() {
+            const count = wishlist.length;
+            const badge = document.getElementById('wishlistBadge');
+            const drawerBadge = document.getElementById('wishlistDrawerCountBadge');
+
+            if (badge) {
+                badge.innerText = count;
+                if (count > 0) badge.classList.remove('hidden');
+                else badge.classList.add('hidden');
+            }
+
+            if (drawerBadge) {
+                drawerBadge.innerText = `${count} item${count !== 1 ? 's' : ''}`;
+            }
+
+            const container = document.getElementById('wishlistItemList');
+            if (!container) return;
+
+            if (wishlist.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-12">
+                        <i class="fa-regular fa-heart text-3xl text-pinktheme-400 mb-2"></i>
+                        <p class="text-xs font-bold text-pinktheme-800">Your wishlist is empty</p>
+                    </div>
+                `;
+                return;
+            }
+
+            const wishlistItems = PRODUCTS.filter(p => wishlist.includes(p.id));
+            container.innerHTML = wishlistItems.map(item => `
+                <div class="flex gap-3 p-3 bg-pinktheme-50 rounded-2xl border border-pinktheme-200 items-center">
+                    <img src="${item.image}" alt="${item.name}" class="w-12 h-12 object-cover rounded-xl bg-white">
+                    <div class="flex-1 min-w-0">
+                        <h4 class="text-xs font-bold text-pinktheme-800 truncate">${item.name}</h4>
+                        <p class="text-xs font-black text-pinktheme-800">₱${item.price.toLocaleString('en-US', {minimumFractionDigits: 2})}</p>
+                    </div>
+                    <div class="flex items-center gap-1.5">
+                        <button onclick="addToCart('${item.id}')" class="px-2.5 py-1.5 bg-pinktheme-700 text-white rounded-xl text-[10px] font-bold hover:bg-pinktheme-800 transition">
+                            <i class="fa-solid fa-cart-plus"></i> Add
+                        </button>
+                        <button onclick="toggleWishlist('${item.id}')" class="p-1.5 text-pinktheme-600 hover:text-red-500 transition">
+                            <i class="fa-solid fa-trash text-xs"></i>
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function updateCartUI() {
+            const count = cart.reduce((sum, item) => sum + item.qty, 0);
+            const total = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+
+            const cartBadge = document.getElementById('cartBadge');
+            const cartDrawerCountBadge = document.getElementById('cartDrawerCountBadge');
+            const cartHeaderTotal = document.getElementById('cartHeaderTotal');
+            const cartSubtotal = document.getElementById('cartSubtotal');
+            const cartTotal = document.getElementById('cartTotal');
+
+            if (cartBadge) cartBadge.innerText = count;
+            if (cartDrawerCountBadge) cartDrawerCountBadge.innerText = `${count} item${count !== 1 ? 's' : ''}`;
+            if (cartHeaderTotal) cartHeaderTotal.innerText = `₱${total.toLocaleString('en-US', {minimumFractionDigits: 2})}`;
+            if (cartSubtotal) cartSubtotal.innerText = `₱${total.toLocaleString('en-US', {minimumFractionDigits: 2})}`;
+            if (cartTotal) cartTotal.innerText = `₱${total.toLocaleString('en-US', {minimumFractionDigits: 2})}`;
+
+            const container = document.getElementById('cartItemList');
+            if (!container) return;
+
+            if (cart.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-12">
+                        <i class="fa-solid fa-basket-shopping text-3xl text-pinktheme-400 mb-2"></i>
+                        <p class="text-xs font-bold text-pinktheme-800">Your cart is empty</p>
+                    </div>
+                `;
+            } else {
+                container.innerHTML = cart.map(item => `
+                    <div class="flex gap-3 p-3 bg-pinktheme-50 rounded-2xl border border-pinktheme-200 items-center">
+                        <img src="${item.image}" alt="${item.name}" class="w-12 h-12 object-cover rounded-xl bg-white">
+                        <div class="flex-1 min-w-0">
+                            <h4 class="text-xs font-bold text-pinktheme-800 truncate">${item.name}</h4>
+                            <p class="text-xs font-black text-pinktheme-800">₱${(item.price * item.qty).toLocaleString()}</p>
+                        </div>
+                        <div class="flex items-center gap-1.5">
+                            <button onclick="changeQty('${item.id}', -1)" class="w-5 h-5 rounded bg-white text-pinktheme-800 text-xs font-bold border border-pinktheme-200">-</button>
+                            <span class="text-xs font-bold text-pinktheme-800">${item.qty}</span>
+                            <button onclick="changeQty('${item.id}', 1)" class="w-5 h-5 rounded bg-white text-pinktheme-800 text-xs font-bold border border-pinktheme-200">+</button>
+                        </div>
+                    </div>
+                `).join('');
+            }
+        }
+
+        function updateStoreHeaderUI() {
+            const headerLabel = document.getElementById('selectedStoreHeaderLabel');
+            const headerLabelMobile = document.getElementById('selectedStoreHeaderLabelMobile');
+            const heroPill = document.getElementById('heroStorePillLabel');
+            const cartFulfillmentLabel = document.getElementById('cartFulfillmentLabel');
+
+            const displayName = selectedStore.isDelivery ? 'Home Delivery' : selectedStore.name.replace("Kate's ", "");
+
+            if (headerLabel) headerLabel.innerText = displayName;
+            if (headerLabelMobile) headerLabelMobile.innerText = displayName.split(' ')[0];
+            if (heroPill) heroPill.innerText = selectedStore.name;
+            if (cartFulfillmentLabel) cartFulfillmentLabel.innerText = selectedStore.isDelivery ? 'Fulfillment: Home Delivery' : `Pickup: ${selectedStore.name}`;
+        }
+
+        function renderCategoryButtons() {
+            const container = document.getElementById('categoryContainer');
+            if (!container) return;
+            container.innerHTML = CATEGORIES.map(cat => `
+                <button onclick="filterCategory('${cat.id}')" 
+                    class="px-3.5 py-1.5 rounded-xl text-xs font-bold transition whitespace-nowrap ${currentCategory === cat.id ? 'bg-pinktheme-700 text-white shadow-sm' : 'bg-white hover:bg-pinktheme-200 text-pinktheme-800 border border-pinktheme-200'}">
+                    ${cat.label}
+                </button>
+            `).join('');
+        }
+
+        function renderAuthHeader() {
+            const container = document.getElementById('authHeaderContainer');
+            if (!container) return;
+
+            if (currentUser) {
+                container.innerHTML = `
+                    <button onclick="openProfileModal()" class="flex items-center gap-2 p-1 bg-white rounded-full border border-pinktheme-200 hover:bg-pinktheme-100 transition shadow-sm" title="My Account">
+                        <img src="${currentUser.avatar}" alt="${currentUser.name}" class="w-8 h-8 rounded-full object-cover">
+                        <span class="hidden sm:inline text-xs font-bold text-pinktheme-800 pr-2">${currentUser.name.split(' ')[0]}</span>
+                    </button>
+                `;
+            } else {
+                container.innerHTML = `
+                    <button onclick="openAuthModal('login')" class="relative p-2.5 text-pinktheme-700 hover:bg-pinktheme-200/60 rounded-full transition flex items-center justify-center" title="Sign In / Account">
+                        <i class="fa-regular fa-user text-lg"></i>
+                    </button>
+                `;
+            }
+        }
+
+        function renderProducts() {
+            let list = [...PRODUCTS];
+
+            if (currentCategory !== 'all') list = list.filter(p => p.category === currentCategory);
+            if (searchQuery) list = list.filter(p => p.name.toLowerCase().includes(searchQuery) || p.description.toLowerCase().includes(searchQuery));
+
+            if (currentSort === 'price-low') list.sort((a,b) => a.price - b.price);
+            else if (currentSort === 'price-high') list.sort((a,b) => b.price - a.price);
+            else if (currentSort === 'rating') list.sort((a,b) => b.rating - a.rating);
+
+            const grid = document.getElementById('productGrid');
+            const emptyState = document.getElementById('emptyCatalogState');
+
+            if (!grid) return;
+
+            if (list.length === 0) {
+                grid.innerHTML = '';
+                if (emptyState) emptyState.classList.remove('hidden');
+                return;
+            }
+
+            if (emptyState) emptyState.classList.add('hidden');
+            grid.innerHTML = list.map(p => `
+                <div class="bg-white rounded-3xl border border-pinktheme-200 overflow-hidden shadow-sm hover:shadow-xl hover:border-pinktheme-300 transition duration-300 flex flex-col group">
+                    <div class="relative aspect-square bg-pinktheme-50 overflow-hidden">
+                        <img src="${p.image}" alt="${p.name}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        ${(typeof p.stock === 'number' && p.stock <= 0) ? '<span class="absolute top-3 left-3 bg-pinktheme-900 text-white text-[10px] font-extrabold px-2.5 py-1 rounded-full">SOLD OUT</span>' : ''}
+
+                        <button onclick="toggleWishlist('${p.id}')" class="absolute top-3 right-3 w-8 h-8 rounded-full bg-white/90 text-pinktheme-700 flex items-center justify-center shadow-sm hover:text-pinktheme-500 transition">
+                            <i class="${wishlist.includes(p.id) ? 'fa-solid fa-heart text-pinktheme-500' : 'fa-regular fa-heart'}"></i>
+                        </button>
+                    </div>
+
+                    <div class="p-5 flex-1 flex flex-col justify-between space-y-3">
+                        <div>
+                            <div class="flex items-center gap-1 text-amber-400 text-[11px] mb-1">
+                                <i class="fa-solid fa-star"></i>
+                                <span class="font-bold text-pinktheme-800 ml-1">${p.rating}</span>
+                                <span class="text-pinktheme-600/60">(${p.reviewsCount})</span>
+                            </div>
+                            <h3 class="font-extrabold text-pinktheme-800 text-xs sm:text-sm leading-snug cursor-pointer hover:text-pinktheme-600 transition" onclick="openQuickView('${p.id}')">
+                                ${p.name}
+                            </h3>
+                            
+                            
+                            <!-- BRANCH AVAILABILITY INDICATOR -->
+                            
+                        </div>
+
+                        <div class="pt-3 border-t border-pinktheme-200 flex items-center justify-between">
+                            <div>
+                                <span class="text-[10px] text-pinktheme-600/40 line-through">${p.originalPrice ? '₱' + p.originalPrice.toLocaleString() : ''}</span>
+                                <span class="text-sm font-black text-pinktheme-800 block">₱${p.price.toLocaleString('en-US', {minimumFractionDigits: 2})}</span>
+                            </div>
+                            <button onclick="addToCart('${p.id}')" class="px-3.5 py-2 bg-pinktheme-700 hover:bg-pinktheme-800 text-white rounded-xl text-xs font-bold transition flex items-center gap-1 shadow-sm">
+                                <i class="fa-solid fa-cart-plus"></i> Add
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function openStoreModal() {
+            renderStoreRegionFilters();
+            renderStoreList();
+            const modal = document.getElementById('storeModal');
+            const content = document.getElementById('storeModalContent');
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+                content.classList.remove('scale-95');
+            }, 10);
+        }
+
+        function closeStoreModal() {
+            const modal = document.getElementById('storeModal');
+            const content = document.getElementById('storeModalContent');
+            modal.classList.add('opacity-0');
+            content.classList.add('scale-95');
+            setTimeout(() => modal.classList.add('hidden'), 300);
+        }
+
+        function renderStoreRegionFilters() {
+            const regions = ['All', 'Metro Manila', 'Mindanao', 'Visayas', 'Delivery'];
+            const container = document.getElementById('storeRegionContainer');
+            if (!container) return;
+
+            container.innerHTML = regions.map(r => `
+                <button onclick="setStoreRegionFilter('${r}')" 
+                    class="px-3 py-1 rounded-full text-xs font-bold whitespace-nowrap transition ${selectedRegionFilter === r ? 'bg-pinktheme-700 text-white shadow-sm' : 'bg-white text-pinktheme-800 border border-pinktheme-200 hover:bg-pinktheme-100'}">
+                    ${r}
+                </button>
+            `).join('');
+        }
+
+        function setStoreRegionFilter(region) {
+            selectedRegionFilter = region;
+            renderStoreRegionFilters();
+            renderStoreList();
+        }
+
+        function filterStores(query) {
+            storeSearchQuery = query.trim().toLowerCase();
+            renderStoreList();
+        }
+
+        function renderStoreList() {
+            const container = document.getElementById('storeListContainer');
+            if (!container) return;
+
+            let filtered = [...STORES];
+
+            if (selectedRegionFilter === 'Delivery') {
+                filtered = filtered.filter(s => s.isDelivery);
+            } else if (selectedRegionFilter !== 'All') {
+                filtered = filtered.filter(s => s.region === selectedRegionFilter);
+            }
+
+            if (storeSearchQuery) {
+                filtered = filtered.filter(s => 
+                    s.name.toLowerCase().includes(storeSearchQuery) || 
+                    s.address.toLowerCase().includes(storeSearchQuery) ||
+                    s.region.toLowerCase().includes(storeSearchQuery)
+                );
+            }
+
+            if (filtered.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-8 text-pinktheme-700/70">
+                        <i class="fa-solid fa-store-slash text-2xl text-pinktheme-400 mb-2"></i>
+                        <p class="text-xs font-bold">No store locations found matching "${storeSearchQuery}"</p>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = filtered.map(store => {
+                const isSelected = selectedStore.id === store.id;
+                return `
+                    <div class="p-4 rounded-2xl border transition duration-200 flex flex-col sm:flex-row sm:items-center justify-between gap-4 ${isSelected ? 'bg-pinktheme-100/90 border-pinktheme-500 shadow-sm' : 'bg-pinktheme-50/50 border-pinktheme-200 hover:bg-pinktheme-100/50'}">
+                        <div class="space-y-1">
+                            <div class="flex items-center gap-2">
+                                <span class="px-2 py-0.5 rounded bg-pinktheme-300 text-pinktheme-800 text-[10px] font-black uppercase tracking-wider">${store.badge}</span>
+                                <h4 class="text-xs font-extrabold text-pinktheme-800">${store.name}</h4>
+                            </div>
+                            <p class="text-xs text-pinktheme-700/80 font-medium"><i class="fa-solid fa-location-dot text-pinktheme-500 mr-1"></i> ${store.address}</p>
+                            <div class="flex flex-wrap items-center gap-3 text-[11px] text-pinktheme-600/90 pt-1">
+                                <span><i class="fa-regular fa-clock mr-1"></i> ${store.hours}</span>
+                                <span><i class="fa-solid fa-phone mr-1"></i> ${store.phone}</span>
+                            </div>
+                        </div>
+
+                        <div class="shrink-0 flex sm:flex-col items-center sm:items-end justify-between gap-2 border-t sm:border-t-0 pt-2 sm:pt-0 border-pinktheme-200">
+                            <span class="text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200 flex items-center gap-1">
+                                <i class="fa-solid fa-circle-check"></i> ${store.pickupTime}
+                            </span>
+                            <button onclick="selectStoreBranch('${store.id}')" 
+                                class="px-4 py-2 rounded-xl text-xs font-bold transition shadow-sm ${isSelected ? 'bg-emerald-600 text-white' : 'bg-pinktheme-700 text-white hover:bg-pinktheme-800'}">
+                                ${isSelected ? '<i class="fa-solid fa-check"></i> Selected Store' : 'Select This Store'}
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function selectStoreBranch(storeId) {
+            const store = STORES.find(s => s.id === storeId);
+            if (!store) return;
+
+            selectedStore = store;
+            saveState();
+            updateStoreHeaderUI();
+            closeStoreModal();
+            updateCartUI();
+
+            showToast(store.isDelivery ? 'Set fulfillment to Home Delivery!' : `Selected ${store.name} for Store Pickup!`, 'success');
+        }
+
+        function closeAnnouncement() {
+            const bar = document.getElementById('announcementBar');
+            if (bar) bar.style.display = 'none';
+        }
+
+        function openAuthModal(tab = 'login') {
+            const modal = document.getElementById('authModal');
+            const content = document.getElementById('authModalContent');
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+                content.classList.remove('scale-95');
+            }, 10);
+            switchAuthTab(tab);
+        }
+
+        function closeAuthModal() {
+            const modal = document.getElementById('authModal');
+            const content = document.getElementById('authModalContent');
+            modal.classList.add('opacity-0');
+            content.classList.add('scale-95');
+            setTimeout(() => modal.classList.add('hidden'), 300);
+        }
+
+        function switchAuthTab(tab) {
+            const loginForm = document.getElementById('loginForm');
+            const signupForm = document.getElementById('signupForm');
+            const tabBtnLogin = document.getElementById('tabBtnLogin');
+            const tabBtnSignup = document.getElementById('tabBtnSignup');
+
+            if (tab === 'login') {
+                loginForm.classList.remove('hidden');
+                signupForm.classList.add('hidden');
+                tabBtnLogin.className = 'flex-1 py-2 text-center text-xs font-bold border-b-2 border-pinktheme-700 text-pinktheme-800 transition';
+                tabBtnSignup.className = 'flex-1 py-2 text-center text-xs font-bold border-b-2 border-transparent text-pinktheme-600 hover:text-pinktheme-800 transition';
+            } else {
+                loginForm.classList.add('hidden');
+                signupForm.classList.remove('hidden');
+                tabBtnSignup.className = 'flex-1 py-2 text-center text-xs font-bold border-b-2 border-pinktheme-700 text-pinktheme-800 transition';
+                tabBtnLogin.className = 'flex-1 py-2 text-center text-xs font-bold border-b-2 border-transparent text-pinktheme-600 hover:text-pinktheme-800 transition';
+            }
+        }
+
+        function fillDemoUser(type) {
+            if (type === 'kate') {
+                document.getElementById('loginEmail').value = 'kate@katesgadgets.ph';
+                document.getElementById('loginPassword').value = 'password123';
+            } else {
+                document.getElementById('loginEmail').value = 'alex@example.ph';
+                document.getElementById('loginPassword').value = 'password123';
+            }
+            showToast(`Auto-filled ${type} demo credentials`, 'info');
+        }
+
+        function togglePasswordVisibility(id, btn) {
+            const field = document.getElementById(id);
+            const icon = btn.querySelector('i');
+            if (field.type === 'password') {
+                field.type = 'text';
+                icon.className = 'fa-regular fa-eye-slash text-xs';
+            } else {
+                field.type = 'password';
+                icon.className = 'fa-regular fa-eye text-xs';
+            }
+        }
+
+        function handleLoginSubmit(e) {
+            e.preventDefault();
+            const email = document.getElementById('loginEmail').value.trim().toLowerCase();
+            const password = document.getElementById('loginPassword').value;
+
+            let user = PRESET_USERS[email];
+            if (!user) {
+                const registered = JSON.parse(localStorage.getItem('kate_registered_users') || '{}');
+                user = registered[email];
+            }
+
+            if (user && user.password === password) {
+                currentUser = { name: user.name, email: user.email, avatar: user.avatar, role: user.role };
+                saveState();
+                renderAuthHeader();
+                closeAuthModal();
+                showToast(`Welcome back, ${currentUser.name}!`, 'success');
+            } else {
+                currentUser = {
+                    name: email.split('@')[0].toUpperCase(),
+                    email: email,
+                    avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=150&q=80',
+                    role: 'Customer'
+                };
+                saveState();
+                renderAuthHeader();
+                closeAuthModal();
+                showToast(`Signed in successfully as ${currentUser.name}!`, 'success');
+            }
+        }
+
+        function handleSignupSubmit(e) {
+            e.preventDefault();
+            const name = document.getElementById('signupName').value.trim();
+            const email = document.getElementById('signupEmail').value.trim().toLowerCase();
+            const password = document.getElementById('signupPassword').value;
+
+            const newUser = {
+                name: name,
+                email: email,
+                password: password,
+                avatar: `https://api.dicebear.com/7.x/avataaars/svg?seed=${encodeURIComponent(name)}`,
+                role: 'Valued Customer'
+            };
+
+            const registered = JSON.parse(localStorage.getItem('kate_registered_users') || '{}');
+            registered[email] = newUser;
+            localStorage.setItem('kate_registered_users', JSON.stringify(registered));
+
+            currentUser = { name: newUser.name, email: newUser.email, avatar: newUser.avatar, role: newUser.role };
+            saveState();
+            renderAuthHeader();
+            closeAuthModal();
+            showToast(`Account created! Welcome, ${name}!`, 'success');
+        }
+
+        function handleLogout() {
+            currentUser = null;
+            saveState();
+            renderAuthHeader();
+            closeProfileModal();
+            showToast('Signed out successfully.', 'info');
+        }
+
+        function openProfileModal() {
+            if (!currentUser) return;
+            document.getElementById('profileName').innerText = currentUser.name;
+            document.getElementById('profileEmail').innerText = currentUser.email;
+            document.getElementById('profileAvatar').src = currentUser.avatar;
+            document.getElementById('profileRoleBadge').innerText = currentUser.role;
+
+            const modal = document.getElementById('profileModal');
+            modal.classList.remove('hidden');
+            setTimeout(() => modal.classList.remove('opacity-0'), 10);
+        }
+
+        function closeProfileModal() {
+            const modal = document.getElementById('profileModal');
+            modal.classList.add('opacity-0');
+            setTimeout(() => modal.classList.add('hidden'), 300);
+        }
+
+        function filterCategory(catId) {
+            currentCategory = catId;
+            renderCategoryButtons();
+            renderProducts();
+        }
+
+        function handleSearch(val) {
+            searchQuery = val.trim().toLowerCase();
+            renderProducts();
+        }
+
+        function handleSortChange(val) {
+            currentSort = val;
+            renderProducts();
+        }
+
+        function resetFilters() {
+            currentCategory = 'all';
+            searchQuery = '';
+            const searchEl = document.getElementById('searchInput');
+            if (searchEl) searchEl.value = '';
+            renderCategoryButtons();
+            renderProducts();
+        }
+
+        function addToCart(id) {
+            const p = PRODUCTS.find(item => item.id === id);
+            if (!p) return;
+
+            const existing = cart.find(item => item.id === id);
+            if (existing) existing.qty += 1;
+            else cart.push({ ...p, qty: 1 });
+
+            saveState();
+            updateCartUI();
+            showToast(`Added ${p.name} to cart!`, 'success');
+        }
+
+        function changeQty(id, delta) {
+            const index = cart.findIndex(item => item.id === id);
+            if (index > -1) {
+                cart[index].qty += delta;
+                if (cart[index].qty <= 0) cart.splice(index, 1);
+            }
+            saveState();
+            updateCartUI();
+        }
+
+        function toggleCartDrawer() {
+            const drawer = document.getElementById('cartDrawer');
+            const content = document.getElementById('cartDrawerContent');
+            if (!drawer || !content) return;
+
+            if (drawer.classList.contains('hidden')) {
+                drawer.classList.remove('hidden');
+                setTimeout(() => {
+                    drawer.classList.remove('opacity-0');
+                    content.classList.remove('translate-x-full');
+                }, 10);
+            } else {
+                drawer.classList.add('opacity-0');
+                content.classList.add('translate-x-full');
+                setTimeout(() => drawer.classList.add('hidden'), 300);
+            }
+        }
+
+        function handleCheckout() {
+            if (cart.length === 0) return showToast('Cart is empty!', 'error');
+            if (!currentUser) {
+                toggleCartDrawer();
+                openAuthModal('login');
+                return showToast('Please Sign In before placing an order!', 'info');
+            }
+
+            const total = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+            const fulfillmentType = selectedStore.isDelivery ? 'Home Delivery' : `Store Pickup at ${selectedStore.name}`;
+
+            cart = [];
+            saveState();
+            updateCartUI();
+            toggleCartDrawer();
+            showToast(`Order placed! (${fulfillmentType}) Total: ₱${total.toLocaleString('en-US', {minimumFractionDigits: 2})}`, 'success');
+        }
+
+        function toggleWishlist(id) {
+            const index = wishlist.indexOf(id);
+            if (index > -1) {
+                wishlist.splice(index, 1);
+                showToast('Removed item from wishlist', 'info');
+            } else {
+                wishlist.push(id);
+                showToast('Added item to wishlist!', 'success');
+            }
+            saveState();
+            updateWishlistUI();
+            renderProducts();
+        }
+
+        function toggleWishlistModal() {
+            const drawer = document.getElementById('wishlistDrawer');
+            const content = document.getElementById('wishlistDrawerContent');
+            if (!drawer || !content) return;
+
+            if (drawer.classList.contains('hidden')) {
+                drawer.classList.remove('hidden');
+                setTimeout(() => {
+                    drawer.classList.remove('opacity-0');
+                    content.classList.remove('translate-x-full');
+                }, 10);
+            } else {
+                drawer.classList.add('opacity-0');
+                content.classList.add('translate-x-full');
+                setTimeout(() => drawer.classList.add('hidden'), 300);
+            }
+        }
+
+        function addAllWishlistToCart() {
+            if (wishlist.length === 0) return showToast('Wishlist is empty!', 'info');
+            let addedCount = 0;
+            wishlist.forEach(id => {
+                const p = PRODUCTS.find(item => item.id === id);
+                if (p) {
+                    const existing = cart.find(item => item.id === id);
+                    if (existing) existing.qty += 1;
+                    else cart.push({ ...p, qty: 1 });
+                    addedCount++;
+                }
+            });
+            saveState();
+            updateCartUI();
+            showToast(`Added ${addedCount} wishlist item(s) to cart!`, 'success');
+        }
+
+        function openQuickView(id) {
+            const p = PRODUCTS.find(item => item.id === id);
+            if (!p) return;
+
+            const modal = document.getElementById('quickViewModal');
+            const content = document.getElementById('quickViewContent');
+            if (!modal || !content) return;
+
+            content.innerHTML = `
+                <div class="bg-pinktheme-50 p-6 flex items-center justify-center border-b md:border-b-0 md:border-r border-pinktheme-200">
+                    <img src="${p.image}" alt="${p.name}" class="max-h-64 object-cover rounded-2xl shadow-md border border-white">
+                </div>
+                <div class="p-6 flex flex-col justify-between space-y-4">
+                    <div>
+                        <span class="${p.badgeColor} text-white text-[9px] font-extrabold px-2.5 py-1 rounded-full uppercase shadow-sm">
+                            ${p.badge}
+                        </span>
+                        <h3 class="text-lg font-extrabold text-pinktheme-800 mt-2">${p.name}</h3>
+                        <div class="flex items-center gap-1 text-amber-400 text-xs my-1">
+                            <i class="fa-solid fa-star"></i>
+                            <span class="font-bold text-pinktheme-800 ml-1">${p.rating}</span>
+                            <span class="text-pinktheme-600/60">(${p.reviewsCount} reviews)</span>
+                        </div>
+                        <p class="text-xs text-pinktheme-700/80 leading-relaxed mt-2">${p.description}</p>
+                        
+                        <!-- STORE PICKUP BADGE IN QUICK VIEW -->
+                        <div onclick="closeQuickView(); openStoreModal();" class="mt-3 p-2.5 bg-pinktheme-50 border border-pinktheme-200 rounded-xl flex items-center justify-between cursor-pointer hover:bg-pinktheme-100 transition">
+                            <div class="flex items-center gap-2">
+                                <i class="fa-solid fa-store text-pinktheme-600 text-xs"></i>
+                                <div>
+                                    <span class="block text-[10px] font-bold text-pinktheme-600 uppercase">Availability</span>
+                                    <span class="text-xs font-extrabold text-pinktheme-800">${selectedStore.isDelivery ? 'Ready for Home Shipping' : 'In Stock at ' + selectedStore.name}</span>
+                                </div>
+                            </div>
+                            <span class="text-[10px] font-bold text-pinktheme-700 underline">Change</span>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="mb-4">
+                            <span class="text-xs text-pinktheme-600/50 line-through">${p.originalPrice ? '₱' + p.originalPrice.toLocaleString() : ''}</span>
+                            <span class="text-xl font-black text-pinktheme-800 block">₱${p.price.toLocaleString('en-US', {minimumFractionDigits: 2})}</span>
+                        </div>
+                        <div class="flex gap-2">
+                            <button onclick="addToCart('${p.id}'); closeQuickView();" class="flex-1 py-3 bg-pinktheme-700 hover:bg-pinktheme-800 text-white font-bold text-xs rounded-xl shadow-md transition flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-cart-plus"></i> Add to Cart
+                            </button>
+                            <button onclick="toggleWishlist('${p.id}')" class="p-3 bg-pinktheme-100 text-pinktheme-700 hover:bg-pinktheme-200 rounded-xl transition">
+                                <i class="${wishlist.includes(p.id) ? 'fa-solid fa-heart text-pinktheme-500' : 'fa-regular fa-heart'}"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+                const inner = modal.querySelector('div');
+                if (inner) inner.classList.remove('scale-95');
+            }, 10);
+        }
+
+        function closeQuickView() {
+            const modal = document.getElementById('quickViewModal');
+            if (!modal) return;
+            modal.classList.add('opacity-0');
+            const inner = modal.querySelector('div');
+            if (inner) inner.classList.add('scale-95');
+            setTimeout(() => modal.classList.add('hidden'), 300);
+        }
+
+        function showToast(message, type = 'info') {
+            const container = document.getElementById('toastContainer');
+            if (!container) return;
+
+            const toast = document.createElement('div');
+            let icon = 'fa-circle-info';
+            let bg = 'bg-pinktheme-800 text-white';
+
+            if (type === 'success') {
+                icon = 'fa-circle-check';
+                bg = 'bg-pinktheme-700 text-white';
+            } else if (type === 'error') {
+                icon = 'fa-triangle-exclamation';
+                bg = 'bg-red-600 text-white';
+            }
+
+            toast.className = `${bg} pointer-events-auto px-4 py-3 rounded-2xl shadow-xl border border-white/20 text-xs font-bold flex items-center gap-2.5 transform translate-y-3 opacity-0 transition-all duration-300 max-w-xs`;
+            toast.innerHTML = `<i class="fa-solid ${icon} text-sm"></i> <span>${message}</span>`;
+
+            container.appendChild(toast);
+
+            setTimeout(() => {
+                toast.classList.remove('translate-y-3', 'opacity-0');
+            }, 10);
+
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'translate-y-2');
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+
+        window.onload = function() {
+            const savedStoreId = localStorage.getItem('kate_selected_store');
+            if (savedStoreId) {
+                const found = STORES.find(s => s.id === savedStoreId);
+                if (found) selectedStore = found;
+            }
+
+            const savedUser = localStorage.getItem('kate_user');
+            if (savedUser) { try { currentUser = JSON.parse(savedUser); } catch(e){} }
+
+            const savedCart = localStorage.getItem('kate_cart');
+            if (savedCart) { try { cart = JSON.parse(savedCart); } catch(e){} }
+
+            const savedWishlist = localStorage.getItem('kate_wishlist');
+            if (savedWishlist) { try { wishlist = JSON.parse(savedWishlist); } catch(e){} }
+
+            updateStoreHeaderUI();
+            renderCategoryButtons();
+            renderAuthHeader();
+            renderProducts();
+            updateCartUI();
+            if (typeof updateWishlistUI === 'function') {
+                updateWishlistUI();
+            }
+            renderHeroCarousel();
+            startHeroAutoSlide();
+        };
+        const HERO_SLIDES = [
+    {
+        type: 'image_banner',
+        image: 'iphone18pro_banner.webp',
+        ctaLink: '#catalog',
+        bgClass: 'bg-[#F5F5F7]'
+    },
+    {
+        type: 'image_banner',
+        image: 'iphoneduo_banner.webp',
+        ctaLink: '#catalog',
+        groundBottom: true,
+        bgClass: 'bg-[#F5F5F7]'
+    },
+    {
+        type: 'image_banner',
+        image: 'watchultra4_banner.webp',
+        ctaLink: '#catalog',
+        bgClass: 'bg-black'
+    }
+];
+
+let currentHeroSlide = 0;
+let heroAutoSlide = null;
+
+function renderHeroCarousel() {
+    const container = document.getElementById("heroSlider");
+    const dots = document.getElementById("heroDots");
+
+    if (!container || !dots) return;
+
+    // 1. Initial build of slides if missing
+    const slideNodes = container.querySelectorAll('.hero-slide');
+    if (slideNodes.length !== HERO_SLIDES.length) {
+        container.innerHTML = HERO_SLIDES.map((slide) => {
+            const alignClass = slide.groundBottom ? 'items-end' : 'items-center';
+            const objectClass = slide.groundBottom ? 'object-bottom' : 'object-center';
+
+            return `
+                <div class="hero-slide absolute inset-0 w-full h-full transition-all duration-700 ease-in-out flex ${alignClass} justify-center">
+                    <a href="${slide.ctaLink || '#catalog'}" class="w-full h-full flex ${alignClass} justify-center">
+                        <img src="${slide.image}" alt="Hero Banner" class="w-full h-full object-contain ${objectClass} max-h-[480px]"/>
+                    </a>
+                </div>
+            `;
+        }).join('');
+
+        dots.innerHTML = HERO_SLIDES.map((_, index) => `
+            <button onclick="setHeroSlide(${index})" class="hero-dot h-2.5 rounded-full transition-all duration-500 w-2.5 bg-gray-300 hover:bg-gray-400" aria-label="Go to slide ${index + 1}"></button>
+        `).join('');
+    }
+
+    // 2. Apply background colors and slide positions inside the hero card
+    const updatedSlideNodes = container.querySelectorAll('.hero-slide');
+    updatedSlideNodes.forEach((node, index) => {
+        const slide = HERO_SLIDES[index];
+        const bg = slide.bgClass || 'bg-[#F5F5F7]';
+        const alignClass = slide.groundBottom ? 'items-end' : 'items-center';
+
+        node.className = `hero-slide absolute inset-0 w-full h-full transition-all duration-700 ease-in-out flex ${alignClass} justify-center ${bg}`;
+
+        if (index === currentHeroSlide) {
+            node.classList.add('translate-x-0', 'opacity-100', 'z-10');
+        } else if (index < currentHeroSlide) {
+            node.classList.add('-translate-x-full', 'opacity-0', 'z-0', 'pointer-events-none');
+        } else {
+            node.classList.add('translate-x-full', 'opacity-0', 'z-0', 'pointer-events-none');
+        }
+    });
+
+    // 3. Style indicator dots according to active slide contrast
+    const activeSlide = HERO_SLIDES[currentHeroSlide];
+    const isDark = activeSlide.bgClass === 'bg-black';
+
+    const dotNodes = dots.querySelectorAll('.hero-dot');
+    dotNodes.forEach((dot, index) => {
+        if (index === currentHeroSlide) {
+            dot.className = `hero-dot h-2.5 rounded-full transition-all duration-500 w-7 ${isDark ? 'bg-white' : 'bg-gray-800'}`;
+        } else {
+            dot.className = `hero-dot h-2.5 rounded-full transition-all duration-500 w-2.5 ${isDark ? 'bg-gray-600 hover:bg-gray-400' : 'bg-gray-300 hover:bg-gray-400'}`;
+        }
+    });
+}
+
+function nextHeroSlide() {
+    currentHeroSlide = (currentHeroSlide + 1) % HERO_SLIDES.length;
+    renderHeroCarousel();
+}
+
+function setHeroSlide(index) {
+    currentHeroSlide = index;
+    renderHeroCarousel();
+    startHeroAutoSlide();
+}
+
+function startHeroAutoSlide() {
+    if (heroAutoSlide) clearInterval(heroAutoSlide);
+    heroAutoSlide = setInterval(nextHeroSlide, 4000);
+}
+
+// Make globally accessible for dot clicks
+window.setHeroSlide = setHeroSlide;
+
+/* ================= SAFE CART & WISHLIST ENGINE ================= */
+// Attach functions to window scope without altering existing hero code
+/* ================= SAFE CART & WISHLIST ENGINE (FIXED) ================= */
+window.addToCart = function(productId) {
+    const pId = String(productId);
+    const product = (typeof PRODUCTS !== 'undefined') ? PRODUCTS.find(p => String(p.id) === pId) : null;
+    if (!product) return;
+
+    let currentCart = [];
+    try { currentCart = JSON.parse(localStorage.getItem('kate_cart')) || []; } catch(e){}
+
+    // Ensure price is strictly a clean number
+    const numPrice = typeof product.price === 'number' 
+        ? product.price 
+        : parseFloat(String(product.price).replace(/[^0-9.]/g, '')) || 0;
+
+    const existing = currentCart.find(item => String(item.id) === pId);
+    if (existing) {
+        existing.quantity = (Number(existing.quantity || existing.qty) || 1) + 1;
+        existing.price = numPrice;
+    } else {
+        currentCart.push({
+            id: product.id,
+            name: product.name,
+            image: product.image,
+            price: numPrice,
+            quantity: 1
+        });
+    }
+
+    localStorage.setItem('kate_cart', JSON.stringify(currentCart));
+
+    // Safely trigger all UI updates
+    if (typeof updateCartUI === 'function') updateCartUI();
+    if (typeof renderCart === 'function') renderCart();
+    if (typeof renderCartItems === 'function') renderCartItems();
+    if (typeof showToast === 'function') showToast(`Added ${product.name} to bag!`, 'success');
+    if (typeof toggleCartDrawer === 'function') toggleCartDrawer(true);
+};
+
+window.updateQuantity = function(productId, change) {
+    let currentCart = [];
+    try { currentCart = JSON.parse(localStorage.getItem('kate_cart')) || []; } catch(e){}
+
+    const item = currentCart.find(i => String(i.id) === String(productId));
+    if (!item) return;
+
+    const newQty = (Number(item.quantity || item.qty) || 1) + change;
+    if (newQty <= 0) {
+        currentCart = currentCart.filter(i => String(i.id) !== String(productId));
+    } else {
+        item.quantity = newQty;
+    }
+
+    localStorage.setItem('kate_cart', JSON.stringify(currentCart));
+
+    if (typeof updateCartUI === 'function') updateCartUI();
+    if (typeof renderCart === 'function') renderCart();
+    if (typeof renderCartItems === 'function') renderCartItems();
+};
+
+/* ================= COMPLETE WORKING CART ENGINE ================= */
+// 1. Add To Cart Function
+/* ================= COMPLETE DRAWERS & UI ENGINE ================= */
+
+// 1. ADD TO CART
+window.addToCart = function(productId) {
+    const pId = String(productId);
+    let product = (typeof PRODUCTS !== 'undefined' && Array.isArray(PRODUCTS)) 
+        ? PRODUCTS.find(p => String(p.id) === pId) : null;
+    if (!product) return;
+
+    let currentCart = [];
+    try { currentCart = JSON.parse(localStorage.getItem('kate_cart')) || []; } catch(e){}
+
+    const numPrice = typeof product.price === 'number' 
+        ? product.price 
+        : (parseFloat(String(product.price).replace(/[^0-9.]/g, '')) || 0);
+
+    const existing = currentCart.find(item => String(item.id) === pId);
+    if (existing) {
+        existing.quantity = (Number(existing.quantity) || 1) + 1;
+        existing.price = numPrice;
+    } else {
+        currentCart.push({
+            id: product.id,
+            name: product.name,
+            image: product.image,
+            price: numPrice,
+            quantity: 1
+        });
+    }
+
+    localStorage.setItem('kate_cart', JSON.stringify(currentCart));
+    window.updateCartUI();
+    if (typeof showToast === 'function') showToast(`Added ${product.name} to bag!`, 'success');
+    if (typeof toggleCartDrawer === 'function') toggleCartDrawer(true);
+};
+
+// 2. QUANTITY CONTROLS
+window.updateQuantity = function(productId, change) {
+    let currentCart = [];
+    try { currentCart = JSON.parse(localStorage.getItem('kate_cart')) || []; } catch(e){}
+
+    const item = currentCart.find(i => String(i.id) === String(productId));
+    if (!item) return;
+
+    const newQty = (Number(item.quantity) || 1) + change;
+    if (newQty <= 0) {
+        currentCart = currentCart.filter(i => String(i.id) !== String(productId));
+    } else {
+        item.quantity = newQty;
+    }
+
+    localStorage.setItem('kate_cart', JSON.stringify(currentCart));
+    window.updateCartUI();
+};
+
+// 3. REMOVE FROM CART
+window.removeFromCart = function(productId) {
+    let currentCart = [];
+    try { currentCart = JSON.parse(localStorage.getItem('kate_cart')) || []; } catch(e){}
+
+    currentCart = currentCart.filter(i => String(i.id) !== String(productId));
+    localStorage.setItem('kate_cart', JSON.stringify(currentCart));
+    window.updateCartUI();
+};
+
+// 4. TOGGLE WISHLIST
+window.toggleWishlist = function(productId) {
+    const pId = String(productId);
+    let currentWishlist = [];
+    try { currentWishlist = JSON.parse(localStorage.getItem('kate_wishlist')) || []; } catch(e){}
+
+    const index = currentWishlist.indexOf(pId);
+    if (index > -1) {
+        currentWishlist.splice(index, 1);
+        if (typeof showToast === 'function') showToast('Removed from wishlist', 'info');
+    } else {
+        currentWishlist.push(pId);
+        if (typeof showToast === 'function') showToast('Added to wishlist!', 'success');
+    }
+
+    localStorage.setItem('kate_wishlist', JSON.stringify(currentWishlist));
+    window.updateWishlistUI();
+    if (typeof renderProducts === 'function') renderProducts();
+};
+
+// 5. RENDER CART DRAWER & BADGES
+window.updateCartUI = function() {
+    let currentCart = [];
+    try { currentCart = JSON.parse(localStorage.getItem('kate_cart')) || []; } catch(e){}
+
+    const totalCount = currentCart.reduce((sum, item) => sum + (Number(item.quantity) || 1), 0);
+    const totalPrice = currentCart.reduce((sum, item) => sum + ((Number(item.price) || 0) * (Number(item.quantity) || 1)), 0);
+    const formattedPrice = `₱${totalPrice.toLocaleString('en-PH', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+
+    // Update all badges and drawer header counts
+    const badges = document.querySelectorAll('#cartBadge, #cartCount, #cartDrawerCount');
+    badges.forEach(el => el.textContent = totalCount);
+
+    // Update all drawer subtotal and total labels
+    const totalEls = document.querySelectorAll('#cartHeaderTotal, #cartSubtotal, #cartTotal');
+    totalEls.forEach(el => el.textContent = formattedPrice);
+
+    // Target Cart Drawer Scrollable Body
+    const container = document.getElementById('cartItemsList') || 
+                      document.getElementById('cartItems') || 
+                      document.querySelector('#cartDrawer .overflow-y-auto') ||
+                      document.querySelector('#cartDrawer .flex-1');
+
+    if (!container) return;
+
+    if (currentCart.length === 0) {
+        container.innerHTML = `
+            <div class="flex flex-col items-center justify-center py-16 text-center space-y-3">
+                <i class="fa-solid fa-bag-shopping text-4xl text-pinktheme-300"></i>
+                <p class="text-xs font-bold text-pinktheme-700">Your cart is empty</p>
+            </div>
+        `;
+        return;
+    }
+
+    container.innerHTML = currentCart.map(item => `
+        <div class="flex items-center gap-3 p-3 bg-white rounded-2xl border border-pinktheme-200/80 shadow-sm mb-3">
+            <img src="${item.image}" alt="${item.name}" class="w-14 h-14 object-contain bg-pinktheme-50/50 rounded-xl p-1 border border-pinktheme-100 shrink-0" />
+            <div class="flex-1 min-w-0">
+                <h4 class="text-xs font-extrabold text-pinktheme-900 truncate">${item.name}</h4>
+                <p class="text-xs font-black text-pinktheme-700 mt-0.5">₱${(Number(item.price) || 0).toLocaleString('en-PH', { minimumFractionDigits: 2 })}</p>
+                <div class="flex items-center gap-2 mt-2">
+                    <button onclick="window.updateQuantity('${item.id}', -1)" class="w-5 h-5 bg-pinktheme-50 border border-pinktheme-300 rounded-md flex items-center justify-center text-xs font-bold text-pinktheme-800 hover:bg-pinktheme-100 transition">-</button>
+                    <span class="text-xs font-bold text-pinktheme-900 w-4 text-center">${item.quantity}</span>
+                    <button onclick="window.updateQuantity('${item.id}', 1)" class="w-5 h-5 bg-pinktheme-50 border border-pinktheme-300 rounded-md flex items-center justify-center text-xs font-bold text-pinktheme-800 hover:bg-pinktheme-100 transition">+</button>
+                </div>
+            </div>
+            <button onclick="window.removeFromCart('${item.id}')" class="text-pinktheme-400 hover:text-red-500 p-2 transition shrink-0">
+                <i class="fa-regular fa-trash-can text-sm"></i>
+            </button>
+        </div>
+    `).join('');
+};
+
+// 6. RENDER WISHLIST DRAWER & BADGES
+window.updateWishlistUI = function() {
+    let currentWishlist = [];
+    try { currentWishlist = JSON.parse(localStorage.getItem('kate_wishlist')) || []; } catch(e){}
+
+    const badges = document.querySelectorAll('#wishlistBadge, #wishlistCount, #wishlistDrawerCount');
+    badges.forEach(el => {
+        el.textContent = currentWishlist.length;
+        if (currentWishlist.length > 0) {
+            el.classList.remove('hidden');
+        }
+    });
+
+    const container = document.getElementById('wishlistItemsList') || 
+                      document.getElementById('wishlistItems') || 
+                      document.querySelector('#wishlistModal .overflow-y-auto') ||
+                      document.querySelector('#wishlistDrawer .overflow-y-auto') ||
+                      document.querySelector('#wishlistModal .flex-1');
+
+    if (!container) return;
+
+    if (currentWishlist.length === 0) {
+        container.innerHTML = `
+            <div class="flex flex-col items-center justify-center py-16 text-center space-y-3">
+                <i class="fa-regular fa-heart text-4xl text-pinktheme-300"></i>
+                <p class="text-xs font-bold text-pinktheme-700">Your wishlist is empty</p>
+            </div>
+        `;
+        return;
+    }
+
+    const savedProducts = (typeof PRODUCTS !== 'undefined') 
+        ? PRODUCTS.filter(p => currentWishlist.includes(String(p.id))) 
+        : [];
+
+    container.innerHTML = savedProducts.map(product => `
+        <div class="flex items-center gap-3 p-3 bg-white rounded-2xl border border-pinktheme-200/80 shadow-sm mb-3">
+            <img src="${product.image}" alt="${product.name}" class="w-14 h-14 object-contain bg-pinktheme-50/50 rounded-xl p-1 border border-pinktheme-100 shrink-0" />
+            <div class="flex-1 min-w-0">
+                <h4 class="text-xs font-extrabold text-pinktheme-900 truncate">${product.name}</h4>
+                <p class="text-xs font-black text-pinktheme-700 mt-0.5">₱${(Number(product.price) || 0).toLocaleString('en-PH', { minimumFractionDigits: 2 })}</p>
+            </div>
+            <button onclick="window.addToCart('${product.id}')" class="px-3 py-1.5 bg-pinktheme-700 hover:bg-pinktheme-800 text-white rounded-xl text-xs font-bold transition">
+                Add
+            </button>
+            <button onclick="window.toggleWishlist('${product.id}')" class="text-pinktheme-400 hover:text-red-500 p-2 transition shrink-0">
+                <i class="fa-solid fa-xmark text-sm"></i>
+            </button>
+        </div>
+    `).join('');
+};
+window.updateCartUI = function() {
+    let currentCart = [];
+    try {
+        currentCart = JSON.parse(localStorage.getItem('kate_cart')) || [];
+    } catch(e) {
+        currentCart = [];
+    }
+
+    const container = document.getElementById('cartItemList') || document.getElementById('cartItems');
+    
+    let totalQty = 0;
+    let totalAmount = 0;
+
+    currentCart.forEach(item => {
+        const qty = Number(item.quantity || item.qty || 1);
+        let price = item.price || item.numPrice || 0;
+        if (typeof price === 'string') {
+            price = parseFloat(price.replace(/[^0-9.]/g, '')) || 0;
+        }
+        totalQty += qty;
+        totalAmount += price * qty;
+    });
+
+    const formattedTotal = `₱${totalAmount.toLocaleString('en-PH', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+
+    // 1. Sync Top Navbar Header Price
+    const navTotalIds = ['cartNavTotal', 'headerCartTotal', 'cartNavPrice', 'navPrice', 'cartTotalNav'];
+    navTotalIds.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.innerText = formattedTotal;
+    });
+
+    // Fallback: Scan top navbar buttons/links containing price text
+    document.querySelectorAll('header button, header a, nav button').forEach(el => {
+        if (el.innerText && (el.innerText.includes('₱') || el.innerText.includes('P0.00'))) {
+            const priceSpan = el.querySelector('span');
+            if (priceSpan) {
+                priceSpan.innerText = formattedTotal;
+            } else {
+                // Preserve icon if present
+                const icon = el.querySelector('i');
+                if (icon) {
+                    el.innerHTML = `${icon.outerHTML} ${formattedTotal}`;
+                } else {
+                    el.innerText = formattedTotal;
+                }
+            }
+        }
+    });
+
+    // 2. Sync Drawer Totals
+    const subtotalElem = document.getElementById('cartSubtotal');
+    const totalElem = document.getElementById('cartTotal');
+    if (subtotalElem) subtotalElem.innerText = formattedTotal;
+    if (totalElem) totalElem.innerText = formattedTotal;
+
+    // 3. Sync Item Counter Badges
+    const countBadge = document.getElementById('cartCount') || document.getElementById('cartBadge');
+    const headerCount = document.getElementById('cartHeaderCount') || document.getElementById('cartItemCount');
+    if (countBadge) countBadge.innerText = totalQty;
+    if (headerCount) headerCount.innerText = `${totalQty} ${totalQty === 1 ? 'Item' : 'Items'}`;
+
+    // 4. Render Cart Drawer Items
+    if (container) {
+        if (currentCart.length === 0) {
+            container.innerHTML = `<div class="text-center py-12 text-pinktheme-400 text-xs font-medium">Your shopping cart is empty</div>`;
+        } else {
+            container.innerHTML = currentCart.map(item => {
+                const qty = Number(item.quantity || item.qty || 1);
+                let price = item.price || item.numPrice || 0;
+                if (typeof price === 'string') {
+                    price = parseFloat(price.replace(/[^0-9.]/g, '')) || 0;
+                }
+                const imgSrc = item.image || item.img || 'kate1.avif';
+
+                return `
+                    <div class="flex items-center justify-between p-3 bg-white rounded-xl border border-pinktheme-200/70 shadow-sm">
+                        <img src="${imgSrc}" alt="${item.name}" class="w-12 h-12 object-contain rounded-lg bg-pinktheme-50/50 p-1 border border-pinktheme-100 shrink-0 mr-2" />
+                        <div class="flex-1 min-w-0 pr-2">
+                            <h4 class="font-bold text-xs text-pinktheme-900 truncate">${item.name}</h4>
+                            <p class="text-[11px] font-extrabold text-pinktheme-700 mt-0.5">₱${price.toLocaleString('en-PH', {minimumFractionDigits: 2})}</p>
+                        </div>
+                        <div class="flex items-center gap-1.5 shrink-0">
+                            <button type="button" onclick="window.updateCartQuantity('${item.id}', -1)" class="w-6 h-6 rounded-md bg-pinktheme-100 text-pinktheme-900 font-bold flex items-center justify-center hover:bg-pinktheme-200 text-xs transition">-</button>
+                            <span class="text-xs font-bold text-pinktheme-800 px-1">${qty}</span>
+                            <button type="button" onclick="window.updateCartQuantity('${item.id}', 1)" class="w-6 h-6 rounded-md bg-pinktheme-100 text-pinktheme-900 font-bold flex items-center justify-center hover:bg-pinktheme-200 text-xs transition">+</button>
+                            <button type="button" onclick="window.removeFromCart('${item.id}')" class="text-red-500 hover:text-red-700 text-xs p-1 ml-1 transition">
+                                <i class="fa-regular fa-trash-can"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+    }
+};
+
+window.updateCartQuantity = function(productId, change) {
+    let currentCart = [];
+    try { currentCart = JSON.parse(localStorage.getItem('kate_cart')) || []; } catch(e) {}
+    const item = currentCart.find(i => String(i.id) === String(productId));
+    if (!item) return;
+    let currentQty = Number(item.quantity || item.qty || 1) + change;
+    if (currentQty <= 0) {
+        currentCart = currentCart.filter(i => String(i.id) !== String(productId));
+    } else {
+        item.quantity = currentQty;
+        item.qty = currentQty;
+    }
+    localStorage.setItem('kate_cart', JSON.stringify(currentCart));
+    window.updateCartUI();
+};
+
+window.removeFromCart = function(productId) {
+    let currentCart = [];
+    try { currentCart = JSON.parse(localStorage.getItem('kate_cart')) || []; } catch(e) {}
+    currentCart = currentCart.filter(i => String(i.id) !== String(productId));
+    localStorage.setItem('kate_cart', JSON.stringify(currentCart));
+    window.updateCartUI();
+};
+// Quantity & Item Removal Helpers
+window.updateCartQuantity = function(productId, change) {
+    let currentCart = [];
+    try {
+        currentCart = JSON.parse(localStorage.getItem('kate_cart')) || [];
+    } catch(e) {
+        currentCart = [];
+    }
+
+    const item = currentCart.find(i => String(i.id) === String(productId));
+    if (!item) return;
+
+    let currentQty = Number(item.quantity || item.qty || 1);
+    currentQty += change;
+
+    if (currentQty <= 0) {
+        currentCart = currentCart.filter(i => String(i.id) !== String(productId));
+    } else {
+        item.quantity = currentQty;
+        item.qty = currentQty;
+    }
+
+    localStorage.setItem('kate_cart', JSON.stringify(currentCart));
+    window.cart = currentCart;
+    window.updateCartUI();
+};
+
+window.removeFromCart = function(productId) {
+    let currentCart = [];
+    try {
+        currentCart = JSON.parse(localStorage.getItem('kate_cart')) || [];
+    } catch(e) {
+        currentCart = [];
+    }
+
+    currentCart = currentCart.filter(i => String(i.id) !== String(productId));
+    localStorage.setItem('kate_cart', JSON.stringify(currentCart));
+    window.cart = currentCart;
+    window.updateCartUI();
+};
+
+// Override duplicate render function calls
+window.renderCart = window.updateCartUI;
+window.renderCartItems = window.updateCartUI;
+window.openCheckoutModal = function() {
+    if (cart.length === 0) return;
+
+    const itemsList = document.getElementById('checkoutItemsList');
+    const totalElem = document.getElementById('checkoutTotalAmount');
+    const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    
+    itemsList.innerHTML = cart.map(item => `
+        <div class="flex justify-between items-center py-1.5 border-b border-pinktheme-100">
+            <span class="text-pinktheme-900 font-semibold">${item.name} x${item.quantity}</span>
+            <span class="text-pinktheme-900 font-bold">₱${(item.price * item.quantity).toLocaleString('en-PH')}</span>
+        </div>
+    `).join('');
+
+    totalElem.innerText = `₱${subtotal.toLocaleString('en-PH', {minimumFractionDigits: 2})}`;
+
+    toggleCartDrawer(false);
+    document.getElementById('checkoutModal').classList.remove('hidden');
+};
+
+window.closeCheckoutModal = function() {
+    document.getElementById('checkoutModal').classList.add('hidden');
+};
+
+window.handlePlaceOrder = function(event) {
+    event.preventDefault();
+    
+    const name = document.getElementById('chkName').value;
+    const payment = document.querySelector('input[name="chkPayment"]:checked').value;
+    const orderRef = `KOG-2026-${Math.floor(1000 + Math.random() * 9000)}`;
+
+    alert(`🎉 Order Confirmed!\n\nReference: ${orderRef}\nThank you, ${name}!\nYour order with ${payment} has been placed successfully.`);
+
+    cart = [];
+    window.updateCartUI();
+    window.closeCheckoutModal();
+};
+// Initial Sync
+document.addEventListener('DOMContentLoaded', () => {
+    window.updateCartUI();
+    window.updateWishlistUI();
+});
+
+// ================= CHECKOUT MODAL LOGIC =================
+window.openCheckoutModal = function() {
+    let currentCart = [];
+    try {
+        currentCart = JSON.parse(localStorage.getItem('kate_cart')) || [];
+    } catch(e) {
+        currentCart = [];
+    }
+
+    if (!currentCart || currentCart.length === 0) {
+        alert('Your shopping cart is empty!');
+        return;
+    }
+
+    const container = document.getElementById('checkoutSummaryItems');
+    const subtotalElem = document.getElementById('checkoutSummarySubtotal');
+    const totalElem = document.getElementById('checkoutSummaryTotal');
+
+    let subtotal = 0;
+
+    if (container) {
+        container.innerHTML = currentCart.map(item => {
+            const qty = Number(item.quantity || item.qty || 1);
+            let price = item.price || item.numPrice || 0;
+            if (typeof price === 'string') {
+                price = parseFloat(price.replace(/[^0-9.]/g, '')) || 0;
+            }
+            const itemTotal = price * qty;
+            subtotal += itemTotal;
+            const imgSrc = item.image || item.img || 'kate1.avif';
+
+            return `
+                <div class="flex items-center justify-between gap-3 pt-2">
+                    <img src="${imgSrc}" class="w-10 h-10 object-contain rounded-lg bg-white p-1 border border-pinktheme-200 shrink-0" />
+                    <div class="flex-1 min-w-0">
+                        <h4 class="font-bold text-xs text-pinktheme-900 truncate">${item.name}</h4>
+                        <p class="text-[10px] font-semibold text-pinktheme-600">Qty: ${qty} × ₱${price.toLocaleString('en-PH', {minimumFractionDigits: 2})}</p>
+                    </div>
+                    <span class="text-xs font-black text-pinktheme-900">₱${itemTotal.toLocaleString('en-PH', {minimumFractionDigits: 2})}</span>
+                </div>
+            `;
+        }).join('');
+    }
+
+    const formattedTotal = `₱${subtotal.toLocaleString('en-PH', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+    if (subtotalElem) subtotalElem.innerText = formattedTotal;
+    if (totalElem) totalElem.innerText = formattedTotal;
+
+    if (typeof toggleCartDrawer === 'function') {
+        toggleCartDrawer(false);
+    }
+
+    const modal = document.getElementById('checkoutModal');
+    if (modal) modal.classList.remove('hidden');
+};
+
+window.closeCheckoutModal = function() {
+    const modal = document.getElementById('checkoutModal');
+    if (modal) modal.classList.add('hidden');
+};
+
+window.toggleFulfillmentType = function(type) {
+    const addrBlock = document.getElementById('deliveryAddressBlock');
+    const shippingLabel = document.getElementById('checkoutSummaryShipping');
+    if (type === 'delivery') {
+        if (addrBlock) addrBlock.classList.remove('hidden');
+        if (shippingLabel) shippingLabel.innerText = '₱150.00';
+    } else {
+        if (addrBlock) addrBlock.classList.add('hidden');
+        if (shippingLabel) shippingLabel.innerText = 'FREE';
+    }
+};
+
+window.processOrderPlacement = function() {
+    // 1. Get input values
+    const nameInput = document.getElementById('coFullName');
+    const phoneInput = document.getElementById('coPhone');
+    const customerName = nameInput ? nameInput.value.trim() : 'Valued Customer';
+    
+    // 2. Get active cart data before clearing
+    let currentCart = [];
+    try {
+        currentCart = JSON.parse(localStorage.getItem('kate_cart')) || [];
+    } catch(e) {
+        currentCart = [];
+    }
+
+    if (!currentCart || currentCart.length === 0) {
+        alert('Your shopping cart is empty!');
+        return;
+    }
+
+    // 3. Calculate actual total safely
+    let grandTotal = 0;
+    currentCart.forEach(item => {
+        const qty = Number(item.quantity || item.qty || 1);
+        let price = item.price || item.numPrice || 0;
+        if (typeof price === 'string') {
+            price = parseFloat(price.replace(/[^0-9.]/g, '')) || 0;
+        }
+        grandTotal += (price * qty);
+    });
+
+    // Check fulfillment & payment options
+    const fulfillmentType = document.querySelector('input[name="fulfillment"]:checked')?.value || 'pickup';
+    const paymentType = document.querySelector('input[name="payment"]:checked')?.value || 'e-wallet';
+
+    if (fulfillmentType === 'delivery') {
+        grandTotal += 150; // Add standard shipping
+    }
+
+    const formattedTotal = `₱${grandTotal.toLocaleString('en-PH', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+    const orderRef = `KOG-${Math.floor(100000 + Math.random() * 900000)}`;
+
+    // 4. Update Receipt Modal Elements
+    const refElem = document.getElementById('recOrderRef');
+    const nameElem = document.getElementById('recCustomerName');
+    const fulElem = document.getElementById('recFulfillment');
+    const payElem = document.getElementById('recPayment');
+    const totalElem = document.getElementById('recTotalAmount');
+
+    if (refElem) refElem.innerText = `#${orderRef}`;
+    if (nameElem) nameElem.innerText = customerName || 'Valued Customer';
+    if (fulElem) fulElem.innerText = fulfillmentType === 'delivery' ? 'Doorstep Delivery' : 'Store Pickup (Abreeza Branch)';
+    if (payElem) payElem.innerText = paymentType;
+    if (totalElem) totalElem.innerText = formattedTotal;
+
+    // 5. Hide checkout modal & open order receipt
+    if (typeof closeCheckoutModal === 'function') closeCheckoutModal();
+    const successModal = document.getElementById('orderSuccessModal');
+    if (successModal) successModal.classList.remove('hidden');
+
+    // 6. Clear state & sync cart UI
+    localStorage.setItem('kate_cart', JSON.stringify([]));
+    window.cart = [];
+    if (typeof window.updateCartUI === 'function') window.updateCartUI();
+};
+
+window.closeSuccessModal = function() {
+    const successModal = document.getElementById('orderSuccessModal');
+    if (successModal) successModal.classList.add('hidden');
+};
+
+/* ===== Dashboard hooks: sold-out guard, order capture, stock sync ===== */
+(function () {
+    const baseAdd = window.addToCart;
+    window.addToCart = function (id) {
+        const p = PRODUCTS.find(x => String(x.id) === String(id));
+        if (p && typeof p.stock === 'number' && p.stock <= 0) { showToast(p.name + ' is sold out', 'error'); return; }
+        return baseAdd.apply(this, arguments);
+    };
+    const basePlace = window.processOrderPlacement;
+    window.processOrderPlacement = function () {
+        let items = [];
+        try { items = (JSON.parse(localStorage.getItem('kate_cart')) || []).map(i => ({ id: i.id, name: i.name, price: Number(i.price) || 0, qty: Number(i.quantity || i.qty || 1) })); } catch (e) {}
+        const val = id => (document.getElementById(id) || {}).value || '';
+        const fulfillment = document.querySelector('input[name="fulfillment"]:checked')?.value || 'pickup';
+        const payment = document.querySelector('input[name="payment"]:checked')?.value || 'e-wallet';
+        const result = basePlace.apply(this, arguments);
+        if (!items.length) return result;
+        try {
+            const sub = items.reduce((t, i) => t + i.price * i.qty, 0);
+            const ref = ((document.getElementById('recOrderRef') || {}).innerText || '').replace('#', '') || 'KOG-' + Date.now();
+            const orders = JSON.parse(localStorage.getItem('kate_orders') || '[]');
+            orders.unshift({ id: ref, createdAt: new Date().toISOString(), customer: { name: val('coFullName') || 'Customer', phone: val('coPhone') }, items,
+                total: sub + (fulfillment === 'delivery' ? 150 : 0), fulfillment, payment,
+                branch: fulfillment === 'delivery' ? 'Home Delivery' : (typeof selectedStore !== 'undefined' ? selectedStore.name : ''), status: 'processing' });
+            localStorage.setItem('kate_orders', JSON.stringify(orders));
+            const cat = JSON.parse(localStorage.getItem('kate_catalog'));
+            if (Array.isArray(cat)) {
+                items.forEach(i => { const c = cat.find(p => p.id == i.id); if (c) c.stock = Math.max(0, (c.stock || 0) - i.qty); const live = PRODUCTS.find(p => p.id == i.id); if (live && c) live.stock = c.stock; });
+                localStorage.setItem('kate_catalog', JSON.stringify(cat));
+                if (typeof renderProducts === 'function') renderProducts();
+            }
+        } catch (e) {}
+        return result;
+    };
+})();
+    </script>
+    <!-- Line 2178: Right here, below </script> and above </body> -->
+
+<!-- ================= CHECKOUT MODAL ================= -->
+<!-- ================= CHECKOUT MODAL ================= -->
+<div id="checkoutModal" class="fixed inset-0 z-50 hidden bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
+    <div class="bg-white w-full max-w-4xl rounded-3xl shadow-2xl border border-pinktheme-200 overflow-hidden my-6 transform transition-all">
+        
+        <!-- Modal Header -->
+        <div class="bg-[#FFF5F8] px-6 py-4 border-b border-pinktheme-200 flex items-center justify-between">
+            <div class="flex items-center gap-2.5">
+                <div class="w-8 h-8 rounded-full bg-pinktheme-200 flex items-center justify-center text-pinktheme-800">
+                    <i class="fa-solid fa-bag-shopping text-sm"></i>
+                </div>
+                <div>
+                    <h2 class="text-base font-extrabold text-pinktheme-900 leading-tight">Express Checkout</h2>
+                    <p class="text-[10px] font-semibold text-pinktheme-600">Kate's Original Gadgets</p>
+                </div>
+            </div>
+            <button onclick="closeCheckoutModal()" class="w-8 h-8 rounded-full bg-pinktheme-100 text-pinktheme-800 hover:bg-pinktheme-200 flex items-center justify-center transition">
+                <i class="fa-solid fa-xmark text-sm"></i>
+            </button>
+        </div>
+
+        <!-- Modal Body Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 max-h-[80vh] overflow-y-auto divide-y lg:divide-y-0 lg:divide-x divide-pinktheme-100">
+            
+            <!-- Left Column: Customer & Delivery Info (7 Cols) -->
+            <div class="lg:col-span-7 p-6 space-y-6">
+                
+                <!-- 1. Contact Info -->
+                <div>
+                    <h3 class="text-xs font-black uppercase tracking-wider text-pinktheme-700 mb-3 flex items-center gap-2">
+                        <i class="fa-regular fa-user"></i> Contact Information
+                    </h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-[11px] font-bold text-pinktheme-800 mb-1">Full Name *</label>
+                            <input type="text" id="coFullName" required placeholder="Kate Dela Cruz" class="w-full px-3 py-2 text-xs bg-pinktheme-50/50 border border-pinktheme-200 rounded-xl focus:outline-none focus:border-pinktheme-500 focus:bg-white text-pinktheme-900">
+                        </div>
+                        <div>
+                            <label class="block text-[11px] font-bold text-pinktheme-800 mb-1">Mobile Number *</label>
+                            <input type="tel" id="coPhone" required placeholder="0917 123 4567" class="w-full px-3 py-2 text-xs bg-pinktheme-50/50 border border-pinktheme-200 rounded-xl focus:outline-none focus:border-pinktheme-500 focus:bg-white text-pinktheme-900">
+                        </div>
+                    </div>
+                    <div class="mt-3">
+                        <label class="block text-[11px] font-bold text-pinktheme-800 mb-1">Email Address</label>
+                        <input type="email" id="coEmail" placeholder="kate@example.com" class="w-full px-3 py-2 text-xs bg-pinktheme-50/50 border border-pinktheme-200 rounded-xl focus:outline-none focus:border-pinktheme-500 focus:bg-white text-pinktheme-900">
+                    </div>
+                </div>
+
+                <!-- 2. Fulfillment Method -->
+                <div>
+                    <h3 class="text-xs font-black uppercase tracking-wider text-pinktheme-700 mb-3 flex items-center gap-2">
+                        <i class="fa-solid fa-truck-fast"></i> Fulfillment Method
+                    </h3>
+                    <div class="grid grid-cols-2 gap-3 mb-3">
+                        <label class="cursor-pointer border-2 border-pinktheme-500 bg-pinktheme-50 p-3 rounded-2xl flex flex-col gap-1 items-start transition">
+                            <div class="flex items-center gap-2">
+                                <input type="radio" name="fulfillment" value="pickup" checked onchange="toggleFulfillmentType('pickup')" class="accent-pinktheme-700">
+                                <span class="text-xs font-black text-pinktheme-900">Store Pickup</span>
+                            </div>
+                            <span class="text-[10px] text-pinktheme-600 pl-5">Kate's Abreeza Mall Branch</span>
+                        </label>
+                        <label class="cursor-pointer border border-pinktheme-200 bg-white p-3 rounded-2xl flex flex-col gap-1 items-start transition hover:border-pinktheme-300">
+                            <div class="flex items-center gap-2">
+                                <input type="radio" name="fulfillment" value="delivery" onchange="toggleFulfillmentType('delivery')" class="accent-pinktheme-700">
+                                <span class="text-xs font-bold text-pinktheme-900">Home Delivery</span>
+                            </div>
+                            <span class="text-[10px] text-pinktheme-600 pl-5">Doorstep Express Shipping</span>
+                        </label>
+                    </div>
+                    
+                    <div id="deliveryAddressBlock" class="hidden space-y-1.5 pt-1">
+                        <label class="block text-[11px] font-bold text-pinktheme-800">Complete Shipping Address *</label>
+                        <textarea id="coAddress" rows="2" placeholder="House/Unit No., Street Name, Barangay, City, Province" class="w-full px-3 py-2 text-xs bg-pinktheme-50/50 border border-pinktheme-200 rounded-xl focus:outline-none focus:border-pinktheme-500 focus:bg-white text-pinktheme-900"></textarea>
+                    </div>
+                </div>
+
+                <!-- 3. Payment Option -->
+                <div>
+                    <h3 class="text-xs font-black uppercase tracking-wider text-pinktheme-700 mb-3 flex items-center gap-2">
+                        <i class="fa-solid fa-credit-card"></i> Payment Option
+                    </h3>
+                    <div class="grid grid-cols-3 gap-2">
+                        <label class="border border-pinktheme-200 p-2.5 rounded-xl text-center cursor-pointer hover:bg-pinktheme-50 transition">
+                            <input type="radio" name="payment" value="e-wallet" checked class="accent-pinktheme-700">
+                            <span class="block text-xs font-extrabold text-pinktheme-900 mt-1">GCash / Maya</span>
+                        </label>
+                        <label class="border border-pinktheme-200 p-2.5 rounded-xl text-center cursor-pointer hover:bg-pinktheme-50 transition">
+                            <input type="radio" name="payment" value="card" class="accent-pinktheme-700">
+                            <span class="block text-xs font-extrabold text-pinktheme-900 mt-1">Credit Card</span>
+                        </label>
+                        <label class="border border-pinktheme-200 p-2.5 rounded-xl text-center cursor-pointer hover:bg-pinktheme-50 transition">
+                            <input type="radio" name="payment" value="cod" class="accent-pinktheme-700">
+                            <span class="block text-xs font-extrabold text-pinktheme-900 mt-1">COD / Store Pay</span>
+                        </label>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Right Column: Order Summary (5 Cols) -->
+            <div class="lg:col-span-5 bg-[#FFF9FB] p-6 flex flex-col justify-between">
+                <div>
+                    <h3 class="text-xs font-black uppercase tracking-wider text-pinktheme-700 mb-4 pb-2 border-b border-pinktheme-200/80">
+                        Order Summary
+                    </h3>
+                    
+                    <!-- Dynamic Product List -->
+                    <div id="checkoutSummaryItems" class="space-y-3 max-h-56 overflow-y-auto pr-1 mb-4 divide-y divide-pinktheme-100">
+                        <!-- Items rendered via JS -->
+                    </div>
+
+                    <!-- Totals Breakdown -->
+                    <div class="space-y-2 text-xs border-t border-pinktheme-200/80 pt-4">
+                        <div class="flex justify-between text-pinktheme-800">
+                            <span>Subtotal</span>
+                            <span id="checkoutSummarySubtotal" class="font-extrabold">₱0.00</span>
+                        </div>
+                        <div class="flex justify-between text-pinktheme-800">
+                            <span>Shipping / Handling</span>
+                            <span id="checkoutSummaryShipping" class="font-extrabold text-green-600">FREE</span>
+                        </div>
+                        <div class="flex justify-between text-base font-black text-pinktheme-900 pt-2 border-t border-pinktheme-200">
+                            <span>Grand Total</span>
+                            <span id="checkoutSummaryTotal" class="text-pinktheme-700">₱0.00</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Complete Order CTA -->
+                <div class="mt-6 pt-4 border-t border-pinktheme-200/60">
+                    <button onclick="processOrderPlacement()" class="w-full py-3.5 bg-pinktheme-900 hover:bg-[#441322] text-white font-extrabold text-xs rounded-2xl shadow-lg transition flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-lock text-xs"></i> Confirm & Place Order
+                    </button>
+                    <p class="text-[10px] text-center text-pinktheme-600/80 mt-2">
+                        <i class="fa-solid fa-shield-halved"></i> Guaranteed Authentic Gadgets
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<!-- ================= ORDER SUCCESS RECEIPT MODAL ================= -->
+<div id="orderSuccessModal" class="fixed inset-0 z-50 hidden bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-white w-full max-w-md rounded-3xl shadow-2xl border border-pinktheme-200 overflow-hidden text-center p-6 sm:p-8 animate-in fade-in zoom-in duration-200">
+        
+        <!-- Success Icon -->
+        <div class="w-16 h-16 bg-pinktheme-100 text-pinktheme-700 rounded-full flex items-center justify-center mx-auto mb-4 border-4 border-pinktheme-50">
+            <i class="fa-solid fa-check text-2xl"></i>
+        </div>
+
+        <span class="text-[10px] font-black uppercase tracking-widest text-pinktheme-600 bg-pinktheme-100 px-3 py-1 rounded-full">Order Confirmed</span>
+        <h2 class="text-xl font-black text-pinktheme-900 mt-3">Thank you for your order!</h2>
+        <p class="text-xs text-pinktheme-700/80 mt-1">We've received your order and are preparing it now.</p>
+
+        <!-- Order Receipt Details Card -->
+        <div class="bg-pinktheme-50/60 border border-pinktheme-200/80 rounded-2xl p-4 my-5 text-left space-y-2.5 text-xs">
+            <div class="flex justify-between items-center pb-2 border-b border-pinktheme-200/60">
+                <span class="text-pinktheme-600 font-semibold">Order Reference:</span>
+                <span id="recOrderRef" class="font-black text-pinktheme-900 font-mono">#KOG-00000</span>
+            </div>
+            <div class="flex justify-between items-center">
+                <span class="text-pinktheme-600 font-semibold">Customer:</span>
+                <span id="recCustomerName" class="font-bold text-pinktheme-900">Valued Customer</span>
+            </div>
+            <div class="flex justify-between items-center">
+                <span class="text-pinktheme-600 font-semibold">Fulfillment:</span>
+                <span id="recFulfillment" class="font-bold text-pinktheme-900">Store Pickup (Abreeza Branch)</span>
+            </div>
+            <div class="flex justify-between items-center">
+                <span class="text-pinktheme-600 font-semibold">Payment Method:</span>
+                <span id="recPayment" class="font-bold text-pinktheme-900 uppercase">GCash / Maya</span>
+            </div>
+            <div class="flex justify-between items-center pt-2 border-t border-pinktheme-200/60 text-sm font-black text-pinktheme-900">
+                <span>Amount Paid:</span>
+                <span id="recTotalAmount" class="text-pinktheme-700">₱0.00</span>
+            </div>
+        </div>
+
+        <!-- Action Button -->
+        <button onclick="closeSuccessModal()" class="w-full py-3.5 bg-pinktheme-900 hover:bg-pinktheme-800 text-white text-xs font-black rounded-2xl shadow-md transition">
+            Continue Shopping
+        </button>
+    </div>
+</div>
+
+</body>
+</html>
